@@ -4,9 +4,8 @@ import 'package:uum_career_advisor_app/views/screens/ProfileTab/profiletabscreen
 import 'package:uum_career_advisor_app/views/screens/JobTab/Jobtabscreen.dart';
 
 import '../../models/user.dart';
-import 'JobTab/Jobtabscreen.dart';
-import 'ProfileTab/profiletabscreen.dart';
 import 'AdviceTab/Advicetabscreen.dart';
+import 'QuestionTab/Questiontabscreen.dart';
 
 //Main screen
 
@@ -35,6 +34,7 @@ class _MainScreenState extends State<MainScreen> {
       // ),
       JobTabScreen(user: widget.user),
       AdviceTabScreen(user: widget.user),
+      QuestionTabScreen(user: widget.user),
       ProfileTabScreen(user: widget.user),
     ];
   }
@@ -69,6 +69,11 @@ class _MainScreenState extends State<MainScreen> {
                   Icons.question_answer,
                 ),
                 label: "Advice"),
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.question_answer,
+                ),
+                label: "Q&A"),
             BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile")
           ]),
     );
@@ -84,11 +89,11 @@ class _MainScreenState extends State<MainScreen> {
         maintitle = "Advice";
       }
       if (_currentIndex == 2) {
+        maintitle = "Q&A";
+      }
+      if (_currentIndex == 3) {
         maintitle = "Profile";
       }
-      // if (_currentIndex == 3) {
-      //   maintitle = "Chat";
-      // }
     });
   }
 }

@@ -41,6 +41,7 @@ class _PostCreationPageState extends State<PostCreationPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Create Post'),
+        backgroundColor: Colors.blueGrey,
       ),
       body: Form(
         key: _formKey,
@@ -79,6 +80,9 @@ class _PostCreationPageState extends State<PostCreationPage> {
               ),
               SizedBox(height: 20.0),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.blueGrey, // Background color
+                ),
                 child: Text('Submit Post'),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
@@ -88,6 +92,8 @@ class _PostCreationPageState extends State<PostCreationPage> {
                       userName: widget.user.name,
                       postTitle: _titleController.text,
                       postContent: _contentController.text,
+                      isFavorite:
+                          false, // Set isFavorite to false for a new post
                     );
 
                     try {

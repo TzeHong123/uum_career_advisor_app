@@ -14,12 +14,14 @@ class Question {
   });
 
   // Assuming you get a JSON map from your database
-  Question.fromJson(Map<String, dynamic> json) {
-    questionId = json['question_id'];
-    userId = json['user_id'];
-    userName = json['user_name'];
-    questionTitle = json['question_title'];
-    questionContent = json['question_content'];
+  factory Question.fromJson(Map<String, dynamic> json) {
+    return Question(
+      questionId: json['question_id'].toString(),
+      userId: json['user_id'].toString(),
+      userName: json['user_name'],
+      questionTitle: json['question_title'],
+      questionContent: json['question_content'],
+    );
   }
 
   Map<String, dynamic> toJson() {

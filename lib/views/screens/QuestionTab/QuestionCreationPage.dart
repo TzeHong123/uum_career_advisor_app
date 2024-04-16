@@ -41,6 +41,7 @@ class _QuestionCreationPageState extends State<QuestionCreationPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Create Question'),
+        backgroundColor: Colors.blueGrey,
       ),
       body: Form(
         key: _formKey,
@@ -79,6 +80,9 @@ class _QuestionCreationPageState extends State<QuestionCreationPage> {
               ),
               SizedBox(height: 20.0),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.blueGrey, // Background color
+                ),
                 child: Text('Submit Question'),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
