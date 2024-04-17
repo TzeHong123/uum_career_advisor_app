@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:uum_career_advisor_app/models/post.dart';
 import 'package:uum_career_advisor_app/views/screens/AdviceTab/PostDetailPage.dart';
 import 'package:uum_career_advisor_app/views/screens/AdviceTab/postCreationPage.dart';
+import 'package:uum_career_advisor_app/views/screens/AdviceTab/MyPostDetailPage.dart';
 import 'package:uum_career_advisor_app/models/question.dart';
 import 'package:uum_career_advisor_app/models/user.dart';
 
@@ -88,7 +89,7 @@ class _AdviceTabScreenState extends State<AdviceTabScreen>
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => PostDetailPage(post: post),
+                builder: (context) => MyPostDetailPage(post: post),
               ),
             );
           },

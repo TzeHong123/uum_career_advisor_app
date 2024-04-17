@@ -6,7 +6,7 @@ import 'package:uum_career_advisor_app/models/question.dart';
 import 'package:uum_career_advisor_app/models/user.dart';
 import 'package:http/http.dart' as http;
 import 'package:uum_career_advisor_app/myconfig.dart';
-import 'package:uum_career_advisor_app/views/screens/AdviceTab/Advicetabscreen.dart';
+import 'package:uum_career_advisor_app/views/screens/QuestionTab/Questiontabscreen.dart';
 
 class QuestionCreationPage extends StatefulWidget {
   final User user;
@@ -117,7 +117,7 @@ class _QuestionCreationPageState extends State<QuestionCreationPage> {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (content) => AdviceTabScreen(
+                                    builder: (content) => QuestionTabScreen(
                                           user: widget.user,
                                         )));
                           } else {

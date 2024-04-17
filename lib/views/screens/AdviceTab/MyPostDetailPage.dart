@@ -2,12 +2,12 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:uum_career_advisor_app/myconfig.dart';
 import 'package:flutter/material.dart';
-import 'package:uum_career_advisor_app/models/question.dart'; // Import your Question model
+import 'package:uum_career_advisor_app/models/post.dart';
 
 class MyPostDetailPage extends StatefulWidget {
-  final Question question;
+  final Post post;
 
-  MyPostDetailPage({Key? key, required this.question}) : super(key: key);
+  MyPostDetailPage({Key? key, required this.post}) : super(key: key);
 
   @override
   _MyPostDetailPageState createState() => _MyPostDetailPageState();
@@ -20,10 +20,8 @@ class _MyPostDetailPageState extends State<MyPostDetailPage> {
   @override
   void initState() {
     super.initState();
-    _titleController =
-        TextEditingController(text: widget.question.questionTitle);
-    _contentController =
-        TextEditingController(text: widget.question.questionContent);
+    _titleController = TextEditingController(text: widget.post.postTitle);
+    _contentController = TextEditingController(text: widget.post.postContent);
   }
 
   @override
@@ -35,33 +33,33 @@ class _MyPostDetailPageState extends State<MyPostDetailPage> {
 
   void _updatePost() async {
     var url = Uri.parse(
-        "${MyConfig().SERVER}/uum_career_advisor_app/php/update_question.php");
+        "${MyConfig().SERVER}/uum_career_advisor_app/php/update_post.php");
     var response = await http.post(url, body: {
-      'question_id': widget.question.questionId
-          .toString(), // assuming your Question model has an id
-      'question_title': _titleController.text,
-      'question_content': _contentController.text,
+      'post_id':
+          widget.post.postId.toString(), // assuming your post model has an id
+      'post_title': _titleController.text,
+      'post_content': _contentController.text,
     });
 
     if (response.body == 'success') {
       setState(() {
         // Update the local data that feeds the UI, if necessary
-        widget.question.questionTitle = _titleController.text;
-        widget.question.questionContent = _contentController.text;
+        widget.post.postTitle = _titleController.text;
+        widget.post.postContent = _contentController.text;
       });
       Navigator.pop(context); // Optionally pop the context after updating
     } else {
       // Handle error
-      print('Failed to update question');
+      print('Failed to update post');
     }
   }
 
   void _deletePost() async {
     var url = Uri.parse(
-        "${MyConfig().SERVER}/uum_career_advisor_app/php/delete_question.php");
+        "${MyConfig().SERVER}/uum_career_advisor_app/php/delete_post.php");
     var response = await http.post(url, body: {
-      'question_id': widget.question.questionId
-          .toString(), // assuming your Question model has an id
+      'post_id':
+          widget.post.postId.toString(), // assuming your post model has an id
     });
 
     if (response.body == 'success') {
@@ -105,7 +103,7 @@ class _MyPostDetailPageState extends State<MyPostDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Edit My Question"),
+        title: Text("Edit My post"),
         backgroundColor: Colors.blueGrey,
         actions: [
           IconButton(
