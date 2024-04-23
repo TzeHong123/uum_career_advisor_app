@@ -199,7 +199,8 @@ class _QuestionTabScreenState extends State<QuestionTabScreen>
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => PostDetailPage(question: question),
+                builder: (context) =>
+                    PostDetailPage(user: widget.user, question: question),
               ),
             );
           },
