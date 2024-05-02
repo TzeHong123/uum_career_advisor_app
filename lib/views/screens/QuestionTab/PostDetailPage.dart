@@ -26,6 +26,26 @@ class _PostDetailPageState extends State<PostDetailPage> {
   void initState() {
     super.initState();
     commentController = TextEditingController();
+    // Initialize your comments list here, for demonstration I'll add a couple of example comments.
+    comments = [
+      Comment(
+          id: 1,
+          userId: '1',
+          username: 'Jane Doe',
+          userProfilePic: 'assets/images/profile.png',
+          text: 'Great question!',
+          upvotes: 10,
+          downvotes: 2),
+      Comment(
+          id: 2,
+          userId: '2',
+          username: 'John',
+          userProfilePic: 'assets/images/profile.png',
+          text:
+              'I think you should go find some good tutorial video or consult an expert online. Do not be afraid to ask, there are always people willing to help you!',
+          upvotes: 30,
+          downvotes: 0)
+    ];
   }
 
   Future<void> addComment(String? userId, String? questionId,
@@ -35,8 +55,8 @@ class _PostDetailPageState extends State<PostDetailPage> {
 
     try {
       var response = await http.post(url, body: {
-        'user_id': userId ?? '',
-        'question_id': questionId ?? '',
+        'user_id': userId.toString(),
+        'question_id': questionId.toString(),
         'user_profile_pic': userProfilePic,
         'comment_text': commentText,
         'upvotes': '0', // default value
@@ -45,6 +65,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
 
       if (response.statusCode == 200) {
         print('Comment added successfully');
+        // Optionally, update your local list of comments if needed
       } else {
         print('Failed to add comment');
       }
@@ -53,33 +74,40 @@ class _PostDetailPageState extends State<PostDetailPage> {
     }
   }
 
-  Future<List<Comment>> fetchComments(String? questionId) async {
-    var url = Uri.parse(
-        "${MyConfig().SERVER}/uum_career_advisor_app/php/fetch_comments.php?question_id=${questionId ?? ''}");
-    var response = await http.get(url);
+//   Future<List<Comment>> fetchComments(int questionId) async {
+//   var url = Uri.parse("${MyConfig().SERVER}/uum_career_advisor_app/php/fetch_comments.php?question_id=$questionId");
+//   var response = await http.get(url);
 
-    if (response.statusCode == 200) {
-      var jsonResponse = json.decode(response.body);
-      if (jsonResponse['status'] == 'success') {
-        List<Comment> comments = List<Comment>.from(
-            jsonResponse['data'].map((model) => Comment.fromJson(model)));
-        return comments;
-      } else {
-        throw Exception('Failed to load comments: ${jsonResponse['message']}');
-      }
-    } else {
-      throw Exception('Failed to load comments');
-    }
-  }
+//   if (response.statusCode == 200) {
+//     var jsonResponse = json.decode(response.body);
+//     if (jsonResponse['status'] == 'success') {
+//       List<Comment> comments = List<Comment>.from(
+//         jsonResponse['data'].map((model) => Comment.fromJson(model))
+//       );
+//       return comments;
+//     } else {
+//       throw Exception('Failed to load comments: ${jsonResponse['message']}');
+//     }
+//   } else {
+//     throw Exception('Failed to load comments');
+//   }
+// }
 
   void handleSubmit() {
+    String? userId =
+        widget.user.id; // Example user ID, get this from your user data
+    String? questionId = widget
+        .question.questionId; // Get the question ID from your Question object
+    String userProfilePic =
+        "assets/images/profile.png"; // Example profile picture path
+
     if (commentController.text.isNotEmpty) {
-      addComment(widget.user.id, widget.question.questionId,
-              "assets/images/profile.png", commentController.text)
+      addComment(userId, questionId, userProfilePic, commentController.text)
           .then((_) {
         print("Comment submitted!");
-        commentController.clear();
-        setState(() {});
+        commentController.clear(); // Clear the text field after submitting
+        setState(
+            () {}); // Update the UI if necessary, such as updating a comment list
       }).catchError((error) {
         print("Failed to submit comment: $error");
       });
@@ -114,33 +142,18 @@ class _PostDetailPageState extends State<PostDetailPage> {
               SizedBox(height: 24),
               Text('Comments',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-              FutureBuilder<List<Comment>>(
-                future: fetchComments(widget.question.questionId),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(child: CircularProgressIndicator());
-                  } else if (snapshot.hasError) {
-                    return Text("Error: ${snapshot.error}");
-                  } else if (snapshot.hasData) {
-                    return ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: snapshot.data!.length,
-                      itemBuilder: (context, index) {
-                        Comment comment = snapshot.data![index];
-                        return CommentWidget(
-                          userName: comment.username ?? "Unknown",
-                          userImageUrl: comment.userProfilePic ??
-                              "assets/images/profile.png",
-                          comment: comment.text ?? "",
-                          upvotes: comment.upvotes,
-                          downvotes: comment.downvotes,
-                        );
-                      },
-                    );
-                  } else {
-                    return Text("No comments found.");
-                  }
+              ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: comments.length,
+                itemBuilder: (context, index) {
+                  return CommentWidget(
+                    userName: comments[index].username,
+                    userImageUrl: comments[index].userProfilePic,
+                    comment: comments[index].text,
+                    upvotes: comments[index].upvotes,
+                    downvotes: comments[index].downvotes,
+                  );
                 },
               ),
               TextField(
@@ -149,7 +162,8 @@ class _PostDetailPageState extends State<PostDetailPage> {
                   labelText: 'Add a comment...',
                   border: OutlineInputBorder(),
                 ),
-                onSubmitted: (value) => handleSubmit(),
+                onSubmitted: (value) =>
+                    handleSubmit(), // Ensure this uses handleSubmit
               ),
             ],
           ),
@@ -157,6 +171,24 @@ class _PostDetailPageState extends State<PostDetailPage> {
       ),
     );
   }
+//   FutureBuilder<List<Comment>>(
+//   future: fetchComments(question.id),
+//   builder: (context, snapshot) {
+//     if (snapshot.connectionState == ConnectionState.done) {
+//       if (snapshot.hasData) {
+//         return ListView.builder(
+//           itemCount: snapshot.data!.length,
+//           itemBuilder: (context, index) {
+//             return CommentWidget(comment: snapshot.data![index]);
+//           },
+//         );
+//       } else if (snapshot.hasError) {
+//         return Text("${snapshot.error}");
+//       }
+//     }
+//     return CircularProgressIndicator(); // Show loading spinner while waiting for data
+//   },
+// )
 
   @override
   void dispose() {
@@ -188,6 +220,9 @@ class CommentWidget extends StatelessWidget {
       child: ListTile(
         leading: CircleAvatar(
           backgroundImage: AssetImage(userImageUrl),
+          // onBackgroundImageError: (exception, stackTrace) {
+          //   return Text(userName[0]); // Fallback to initial letter
+          // },
         ),
         title: Text(userName, style: TextStyle(fontWeight: FontWeight.bold)),
         subtitle: Column(
@@ -195,7 +230,7 @@ class CommentWidget extends StatelessWidget {
           children: <Widget>[
             Text(
               comment,
-              textAlign: TextAlign.justify,
+              textAlign: TextAlign.justify, // Justifying the comment text
             ),
             Row(
               children: <Widget>[

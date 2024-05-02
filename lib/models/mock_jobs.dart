@@ -125,5 +125,100 @@ List<Job> getMockJobs() {
       employeeReview:
           "Creative team and opportunities to work on diverse projects.",
     ),
+    Job(
+      id: "13",
+      title: "Data Scientist",
+      company: "Insightful Analytics",
+      location: "Singapore",
+      salaryRange: "SGD 80,000 - SGD 120,000",
+      description:
+          "Utilize data to uncover insights and make data-driven decisions.",
+      skillsRequired: ["Machine Learning", "Python", "Statistics"],
+      employeeReview: "Cutting-edge projects and supportive team environment.",
+    ),
+    Job(
+      id: "14",
+      title: "Cybersecurity Analyst",
+      company: "SecureTech Solutions",
+      location: "San Francisco, CA",
+      salaryRange: "\$90,000 - \$110,000",
+      description: "Protect company networks and systems from cyber threats.",
+      skillsRequired: [
+        "Cybersecurity",
+        "Network Security",
+        "Penetration Testing"
+      ],
+      employeeReview:
+          "Exciting challenges and opportunities for professional growth.",
+    ),
+    Job(
+      id: "15",
+      title: "Systems Administrator",
+      company: "Cloud Innovations",
+      location: "Seattle, WA",
+      salaryRange: "\$75,000 - \$95,000",
+      description: "Manage and maintain organization's IT infrastructure.",
+      skillsRequired: [
+        "System Administration",
+        "Network Administration",
+        "Linux"
+      ],
+      employeeReview:
+          "Dynamic work environment with opportunities for skill development.",
+    ),
+    Job(
+      id: "16",
+      title: "Machine Learning Engineer",
+      company: "AI Dynamics",
+      location: "London, UK",
+      salaryRange: "£60,000 - £90,000",
+      description:
+          "Design and implement machine learning models and algorithms.",
+      skillsRequired: ["Machine Learning", "Python", "Deep Learning"],
+      employeeReview: "Innovative projects and supportive colleagues.",
+    ),
+    Job(
+      id: "17",
+      title: "DevOps Engineer",
+      company: "Agile DevOps Solutions",
+      location: "Berlin, Germany",
+      salaryRange: "€70,000 - €100,000",
+      description: "Streamline software development and deployment processes.",
+      skillsRequired: ["DevOps", "CI/CD", "Cloud Computing"],
+      employeeReview:
+          "Collaborative culture with a focus on continuous improvement.",
+    ),
+    Job(
+      id: "18",
+      title: "UI/UX Designer",
+      company: "Interactive Designs",
+      location: "Toronto, Canada",
+      salaryRange: "CAD 70,000 - CAD 90,000",
+      description: "Create intuitive and visually appealing user interfaces.",
+      skillsRequired: ["UI/UX Design", "Prototyping", "User Research"],
+      employeeReview:
+          "Creative atmosphere with opportunities for design innovation.",
+    ),
+    Job(
+      id: "19",
+      title: "Network Engineer",
+      company: "Connectivity Solutions",
+      location: "Sydney, Australia",
+      salaryRange: "AUD 80,000 - AUD 110,000",
+      description: "Design, implement, and manage computer networks.",
+      skillsRequired: ["Network Engineering", "Cisco", "Routing and Switching"],
+      employeeReview: "Exciting projects and a supportive team environment.",
+    ),
+    Job(
+      id: "20",
+      title: "Full Stack Developer",
+      company: "CodeCrafters Inc.",
+      location: "Austin, TX",
+      salaryRange: "\$85,000 - \$110,000",
+      description: "Develop both client-side and server-side software.",
+      skillsRequired: ["JavaScript", "Node.js", "React", "MongoDB"],
+      employeeReview:
+          "Innovative projects and opportunities for skill advancement.",
+    ),
   ];
 }
