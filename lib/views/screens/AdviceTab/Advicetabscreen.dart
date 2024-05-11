@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:uum_career_advisor_app/models/post.dart';
 import 'package:uum_career_advisor_app/views/screens/AdviceTab/PostDetailPage.dart';
 import 'package:uum_career_advisor_app/views/screens/AdviceTab/postCreationPage.dart';
-import 'package:uum_career_advisor_app/views/screens/AdviceTab/MyPostDetailPage.dart';
-//import 'package:uum_career_advisor_app/models/question.dart';
+import 'package:uum_career_advisor_app/views/screens/AdviceTab/EditPostPage.dart';
 import 'package:uum_career_advisor_app/models/user.dart';
 
 class AdviceTabScreen extends StatefulWidget {
@@ -133,8 +132,8 @@ class _AdviceTabScreenState extends State<AdviceTabScreen>
         bottom: TabBar(
           controller: _tabController,
           tabs: [
-            Tab(text: 'Advice posts'),
-            Tab(text: 'My Posts'),
+            Tab(text: 'Advice'),
+            Tab(text: 'Admin only'),
           ],
         ),
       ),
@@ -197,59 +196,70 @@ class _AdviceTabScreenState extends State<AdviceTabScreen>
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => PostDetailPage(post: post),
+                builder: (context) =>
+                    PostDetailPage(user: widget.user, post: post),
               ),
             );
           },
-          child: Card(
-            margin: EdgeInsets.all(8.0),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    post.postTitle ?? 'No Title',
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                    ),
+          child: Container(
+            margin: EdgeInsets.all(10),
+            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+            decoration: BoxDecoration(
+              color: Colors.blueGrey[50], // Light grey color for the background
+              borderRadius: BorderRadius.circular(10), // Rounded corners
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  spreadRadius: 1,
+                  blurRadius: 5,
+                  offset: Offset(0, 3), // changes position of shadow
+                ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  post.postTitle ?? 'No Title',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black, // Text color
                   ),
-                  SizedBox(height: 4.0),
-                  Text(post.postContent ?? 'No Content'),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      TextButton.icon(
-                        // Toggle like button
-                        icon: Icon(
-                          post.userHasLiked == 1
-                              ? Icons.thumb_up
-                              : Icons.thumb_up_alt_outlined,
-                          color: post.userHasLiked == 1
-                              ? Colors.blue
-                              : Colors.grey,
-                        ),
-                        label: Text(
-                            '${post.likes}'), // Display the total number of likes
-                        onPressed: () {
-                          toggleLike(post);
-                        },
+                ),
+                SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    // Like button
+                    IconButton(
+                      icon: Icon(
+                        post.userHasLiked == 1
+                            ? Icons.thumb_up
+                            : Icons.thumb_up_alt_outlined,
+                        color:
+                            post.userHasLiked == 1 ? Colors.blue : Colors.grey,
                       ),
-
-                      // Other buttons or information can be added here
-                      IconButton(
-                        icon: Icon(posts[index].isFavorite
+                      onPressed: () {
+                        toggleLike(post);
+                      },
+                    ),
+                    Text('${post.likes}'),
+                    // Favorite button
+                    IconButton(
+                      icon: Icon(
+                        post.isFavorite
                             ? Icons.favorite
-                            : Icons.favorite_border),
-                        onPressed: () {
-                          addToFavourites(post.postId.toString());
-                        },
-                      )
-                    ],
-                  ),
-                ],
-              ),
+                            : Icons.favorite_border,
+                        color: post.isFavorite ? Colors.red : Colors.grey,
+                      ),
+                      onPressed: () {
+                        addToFavourites(post.postId.toString());
+                      },
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         );
