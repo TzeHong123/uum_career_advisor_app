@@ -101,16 +101,27 @@ class _PostDetailPageState extends State<PostDetailPage> {
                                         color: Colors.black,
                                       ),
                                     ),
-                                    SizedBox(height: 40),
+                                    SizedBox(height: 30),
                                     Text(
-                                      "-By user ${advice.userName}.",
+                                      'By ${advice.userName ?? "Unknown"}',
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16.0,
                                         color: Colors.black,
                                       ),
                                     ),
+                                    SizedBox(height: 3),
+                                    if (advice.jobTitle != null &&
+                                        advice.companyName !=
+                                            null) // Only display if both job title and company name are available
+                                      Text(
+                                        '${advice.jobTitle} at ${advice.companyName}',
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          fontSize: 16.0,
+                                          color: Colors.black54,
+                                        ),
+                                      ),
                                   ],
                                 ),
                               ))
@@ -165,13 +176,12 @@ class _PostDetailPageState extends State<PostDetailPage> {
         "${MyConfig().SERVER}/uum_career_advisor_app/php/load_advice_content.php?post_id=$postId"));
 
     if (response.statusCode == 200) {
-      var responseData = json.decode(response.body);
-      if (responseData['data'] != null && responseData['data'] is List) {
-        List jsonResponse = responseData['data'];
-        return jsonResponse.map((data) => Advice.fromJson(data)).toList();
+      Map<String, dynamic> jsonResponse = json.decode(response.body);
+      if (jsonResponse['status'] == 'success') {
+        List data = jsonResponse['data'];
+        return data.map((json) => Advice.fromJson(json)).toList();
       } else {
-        // If data is not a list or is null, return an empty list
-        return <Advice>[];
+        throw Exception(jsonResponse['message']);
       }
     } else {
       throw Exception('Failed to load advice');
@@ -180,15 +190,30 @@ class _PostDetailPageState extends State<PostDetailPage> {
 
   void _showAddAdviceDialog(BuildContext context) {
     TextEditingController adviceController = TextEditingController();
+    TextEditingController jobTitleController = TextEditingController();
+    TextEditingController companyNameController = TextEditingController();
 
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text("Add Your Advice"),
-          content: TextField(
-            controller: adviceController,
-            decoration: InputDecoration(hintText: "Type your advice here"),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              TextField(
+                controller: adviceController,
+                decoration: InputDecoration(hintText: "Type your advice here"),
+              ),
+              TextField(
+                controller: jobTitleController,
+                decoration: InputDecoration(hintText: "Your Job Title"),
+              ),
+              TextField(
+                controller: companyNameController,
+                decoration: InputDecoration(hintText: "Your Company Name"),
+              ),
+            ],
           ),
           actions: <Widget>[
             TextButton(
@@ -200,8 +225,14 @@ class _PostDetailPageState extends State<PostDetailPage> {
             TextButton(
               child: Text('Submit'),
               onPressed: () {
-                if (adviceController.text.isNotEmpty) {
-                  _addAdviceToPost(adviceController.text);
+                if (adviceController.text.isNotEmpty &&
+                    jobTitleController.text.isNotEmpty &&
+                    companyNameController.text.isNotEmpty) {
+                  _addAdviceToPost(
+                    adviceController.text,
+                    jobTitleController.text,
+                    companyNameController.text,
+                  );
                   Navigator.of(context).pop();
                 }
               },
@@ -212,17 +243,18 @@ class _PostDetailPageState extends State<PostDetailPage> {
     );
   }
 
-  void _addAdviceToPost(String? advice) async {
+  void _addAdviceToPost(
+      String advice, String jobTitle, String companyName) async {
     var url = Uri.parse(
         "${MyConfig().SERVER}/uum_career_advisor_app/php/add_new_advice_content.php");
     try {
       var response = await http.post(url, body: {
         'post_id': widget.post.postId,
         'user_id': widget.user.id,
-        'user_name': widget
-            .user.name, // Update as necessary or remove requirement in PHP
-        'advice_title': widget
-            .post.postTitle, // Update as necessary or remove requirement in PHP
+        'user_name': widget.user.name,
+        'job_title': jobTitle, // Add this field
+        'company_name': companyName, // Add this field
+        'advice_title': widget.post.postTitle,
         'advice_content': advice,
       });
       if (response.statusCode == 200) {

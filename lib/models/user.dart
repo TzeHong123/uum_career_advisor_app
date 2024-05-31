@@ -8,15 +8,16 @@ class User {
   String? datereg;
   String? role;
 
-  User(
-      {this.id,
-      this.email,
-      this.name,
-      this.phone,
-      this.password,
-      this.otp,
-      this.datereg,
-      this.role});
+  User({
+    this.id,
+    this.email,
+    this.name,
+    this.phone,
+    this.password,
+    this.otp,
+    this.datereg,
+    this.role,
+  });
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -39,6 +40,7 @@ class User {
     data['otp'] = otp;
     data['datereg'] = datereg;
     data['role'] = role;
+
     return data;
   }
 }
