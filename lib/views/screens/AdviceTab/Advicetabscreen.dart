@@ -244,6 +244,7 @@ class _AdviceTabScreenState extends State<AdviceTabScreen>
                         toggleLike(post);
                       },
                     ),
+
                     Text('${post.likes}'),
                     // Favorite button
                     IconButton(
