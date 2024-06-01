@@ -5,7 +5,7 @@ class Post {
   String? postTitle;
   String? postContent;
   int likes;
-  int userHasLiked; // No longer marked as late
+  int userHasLiked;
   bool isFavorite;
 
   Post({
@@ -14,8 +14,8 @@ class Post {
     this.userName,
     this.postTitle,
     this.postContent,
-    this.likes = 0, // Provide default value directly
-    this.userHasLiked = 0, // Provide default value directly
+    this.likes = 0,
+    required this.userHasLiked,
     required this.isFavorite,
   });
 
@@ -27,12 +27,10 @@ class Post {
       userName: json['user_name'],
       postTitle: json['post_title'],
       postContent: json['post_content'],
-      likes: int.tryParse(json['post_likes'].toString()) ??
-          0, // Ensure it's an int
+      likes: int.parse(json['post_likes'].toString()),
       userHasLiked:
-          int.tryParse(json['user_has_liked']?.toString() ?? '0') ?? 0,
-      isFavorite: json['isFavorite'] == 1 ||
-          json['isFavorite'] == true, // Handle both integer and boolean values
+          int.parse(json['userHasLiked'].toString()), // Correct the field name
+      isFavorite: json['isFavorite'] == 1 || json['isFavorite'] == true,
     );
   }
 
@@ -45,6 +43,8 @@ class Post {
     data['post_content'] = postContent;
     data['likes'] = likes;
     data['user_has_liked'] = userHasLiked;
+    data['isFavorite'] =
+        isFavorite ? 1 : 0; // Add this line if isFavorite is to be serialized
     return data;
   }
 }

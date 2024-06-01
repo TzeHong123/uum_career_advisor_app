@@ -92,6 +92,7 @@ class _PostCreationPageState extends State<PostCreationPage> {
                       userName: widget.user.name,
                       postTitle: _titleController.text,
                       postContent: _contentController.text,
+                      userHasLiked: 0,
                       isFavorite:
                           false, // Set isFavorite to false for a new post
                     );

@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:uum_career_advisor_app/myconfig.dart';
 import 'package:flutter/material.dart';
 import 'package:uum_career_advisor_app/models/post.dart';
+import 'package:uum_career_advisor_app/views/screens/AdviceTab/EditPostPage.dart';
 import 'package:uum_career_advisor_app/views/screens/AdviceTab/PostDetailPage.dart';
 import 'package:uum_career_advisor_app/views/screens/AdviceTab/postCreationPage.dart';
-import 'package:uum_career_advisor_app/views/screens/AdviceTab/EditPostPage.dart';
 import 'package:uum_career_advisor_app/models/user.dart';
 
 class AdviceTabScreen extends StatefulWidget {
@@ -34,10 +34,8 @@ class _AdviceTabScreenState extends State<AdviceTabScreen>
 
   void _handleTabSelection() {
     if (_tabController.index == 1) {
-      // When My Posts tab is selected
       _filterUserPosts();
     } else {
-      // When Advice Posts tab is selected
       setState(() {
         displayedPosts = List.from(posts);
       });
@@ -47,7 +45,7 @@ class _AdviceTabScreenState extends State<AdviceTabScreen>
   void _filterUserPosts() {
     setState(() {
       userPosts = posts.where((post) => post.userId == widget.user.id).toList();
-      displayedPosts = userPosts; // Only show user's posts in My Posts tab
+      displayedPosts = userPosts;
     });
   }
 
@@ -62,10 +60,12 @@ class _AdviceTabScreenState extends State<AdviceTabScreen>
         var jsonData = json.decode(response.body);
         if (jsonData['status'] == 'success') {
           var postsData = jsonData['data']['posts'];
+          // Print the posts data for debugging
+          print('Posts data: $postsData');
           setState(() {
             posts =
                 List<Post>.from(postsData.map((item) => Post.fromJson(item)));
-            displayedPosts = List.from(posts); // Initially show all posts
+            displayedPosts = List.from(posts);
           });
         } else {
           print('Failed to load posts');
@@ -79,40 +79,49 @@ class _AdviceTabScreenState extends State<AdviceTabScreen>
   }
 
   Widget _buildMyPostsTab() {
-    return ListView.builder(
-      itemCount: userPosts.length, // Use userPosts for this tab
-      itemBuilder: (context, index) {
-        final post = userPosts[index];
-        return InkWell(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => MyPostDetailPage(post: post),
-              ),
-            );
-          },
-          child: Card(
-            margin: EdgeInsets.all(8.0),
-            child: Container(
-              height: 150,
-              padding: EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(post.postTitle ?? 'No Title',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                  SizedBox(height: 14),
-                  Text(post.postContent ?? 'No Content',
-                      style: Theme.of(context).textTheme.bodyText2),
-                ],
+    if (widget.user.name == "admin") {
+      return ListView.builder(
+        itemCount: userPosts.length,
+        itemBuilder: (context, index) {
+          final post = userPosts[index];
+          return InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MyPostDetailPage(post: post),
+                ),
+              );
+            },
+            child: Card(
+              margin: EdgeInsets.all(8.0),
+              child: Container(
+                height: 150,
+                padding: EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(post.postTitle ?? 'No Title',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18)),
+                    SizedBox(height: 14),
+                    Text(post.postContent ?? 'No Content',
+                        style: Theme.of(context).textTheme.bodyText2),
+                  ],
+                ),
               ),
             ),
-          ),
-        );
-      },
-    );
+          );
+        },
+      );
+    } else {
+      return Center(
+        child: Text(
+          'Only for Adminstrator.',
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
+      );
+    }
   }
 
   @override
@@ -157,7 +166,6 @@ class _AdviceTabScreenState extends State<AdviceTabScreen>
                       ),
                     );
                   } else {
-                    // Show a message or dialog informing that only seniors can create posts
                     showDialog(
                       context: context,
                       builder: (context) {
@@ -191,6 +199,11 @@ class _AdviceTabScreenState extends State<AdviceTabScreen>
       itemCount: displayedPosts.length,
       itemBuilder: (context, index) {
         final post = displayedPosts[index];
+        // Debug print statements to verify the post data
+        print('Post ID: ${post.postId}');
+        print('Post Title: ${post.postTitle}');
+        print('Post Likes: ${post.likes}');
+        print('User Has Liked: ${post.userHasLiked}');
         return InkWell(
           onTap: () {
             Navigator.push(
@@ -205,14 +218,14 @@ class _AdviceTabScreenState extends State<AdviceTabScreen>
             margin: EdgeInsets.all(10),
             padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
             decoration: BoxDecoration(
-              color: Colors.blueGrey[50], // Light grey color for the background
-              borderRadius: BorderRadius.circular(10), // Rounded corners
+              color: Colors.blueGrey[50],
+              borderRadius: BorderRadius.circular(10),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.1),
                   spreadRadius: 1,
                   blurRadius: 5,
-                  offset: Offset(0, 3), // changes position of shadow
+                  offset: Offset(0, 3),
                 ),
               ],
             ),
@@ -224,14 +237,14 @@ class _AdviceTabScreenState extends State<AdviceTabScreen>
                   style: TextStyle(
                     fontSize: 18.0,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black, // Text color
+                    color: Colors.black,
                   ),
                 ),
                 SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    // Like button
+                    // Improved Like button
                     IconButton(
                       icon: Icon(
                         post.userHasLiked == 1
@@ -239,12 +252,12 @@ class _AdviceTabScreenState extends State<AdviceTabScreen>
                             : Icons.thumb_up_alt_outlined,
                         color:
                             post.userHasLiked == 1 ? Colors.blue : Colors.grey,
+                        size: 30.0, // Increase the size for better visibility
                       ),
                       onPressed: () {
                         toggleLike(post);
                       },
                     ),
-
                     Text('${post.likes}'),
                     // Favorite button
                     IconButton(
@@ -268,16 +281,15 @@ class _AdviceTabScreenState extends State<AdviceTabScreen>
     );
   }
 
-  //Function for handling backend for updating post like status
   void toggleLike(Post post) async {
-    // Assuming your User model has a userId attribute that stores the user ID
     String? userId = widget.user.id;
     print("Sending like status update for user_id: $userId");
 
-    // Update the UI immediately
+    // Toggle the like status and update the UI immediately
     setState(() {
       post.userHasLiked = post.userHasLiked == 1 ? 0 : 1;
       post.likes += post.userHasLiked == 1 ? 1 : -1;
+      print("Updated post: ${post.toJson()}"); // Debug statement
     });
 
     // Send the update to the backend
@@ -288,8 +300,7 @@ class _AdviceTabScreenState extends State<AdviceTabScreen>
         body: {
           'post_id': post.postId.toString(),
           'user_id': userId,
-          'user_has_liked': post.userHasLiked
-              .toString(), // Corrected to send userHasLiked status
+          'user_has_liked': post.userHasLiked.toString(),
         },
       );
 
@@ -317,24 +328,19 @@ class _AdviceTabScreenState extends State<AdviceTabScreen>
       });
       var jsonData = json.decode(response.body);
       if (jsonData['status'] == 'success') {
-        // Update UI or show a message
         print(jsonData['message']);
       } else {
-        // Handle failure
         print(jsonData['message']);
       }
     } catch (e) {
-      // Handle error
       print(e.toString());
     }
   }
 
   void _searchPost(String query) {
     final filteredPosts = posts.where((post) {
-      final titleLower =
-          post.postTitle?.toLowerCase() ?? ''; // Use null-aware operator
-      final contentLower =
-          post.postContent?.toLowerCase() ?? ''; // Use null-aware operator
+      final titleLower = post.postTitle?.toLowerCase() ?? '';
+      final contentLower = post.postContent?.toLowerCase() ?? '';
       final searchLower = query.toLowerCase();
 
       return titleLower.contains(searchLower) ||
@@ -379,16 +385,11 @@ class _AdviceTabScreenState extends State<AdviceTabScreen>
     );
   }
 
-  Object _checkUserRole() {
-    if (widget.user.role == "Senior") {
-      return 'senior';
-    } else {
-      return 'student';
-    }
+  String _checkUserRole() {
+    return widget.user.role == "Senior" ? 'senior' : 'student';
   }
 
   bool _showAddButton() {
-    // Show the button for all users
     return true;
   }
 }
