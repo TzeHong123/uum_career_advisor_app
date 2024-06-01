@@ -103,7 +103,7 @@ class _MyPostDetailPageState extends State<MyPostDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Edit My post"),
+        title: Text("Edit Advice Banner"),
         backgroundColor: Colors.blueGrey,
         actions: [
           IconButton(

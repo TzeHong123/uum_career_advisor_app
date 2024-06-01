@@ -71,6 +71,17 @@ class _PostDetailPageState extends State<PostDetailPage> {
                   } else if (snapshot.hasError) {
                     return Text("Error: ${snapshot.error}");
                   } else if (snapshot.hasData) {
+                    if (snapshot.data!.isEmpty) {
+                      return Text(
+                        "No advice is found.",
+                        style: TextStyle(
+                          fontSize: 20, // Increase font size
+                          color: Colors.blueGrey[
+                              600], // Change text color to a shade of grey
+                          fontWeight: FontWeight.bold, // Make text bold
+                        ),
+                      );
+                    }
                     return Column(
                       children: snapshot.data!
                           .map((advice) => Container(
@@ -112,8 +123,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
                                     ),
                                     SizedBox(height: 3),
                                     if (advice.jobTitle != null &&
-                                        advice.companyName !=
-                                            null) // Only display if both job title and company name are available
+                                        advice.companyName != null)
                                       Text(
                                         '${advice.jobTitle} at ${advice.companyName}',
                                         textAlign: TextAlign.left,
