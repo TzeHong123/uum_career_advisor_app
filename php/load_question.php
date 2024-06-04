@@ -1,58 +1,70 @@
 <?php
-if (!isset($_POST)) {
-    $response = array('status' => 'failed', 'data' => null);
-    sendJsonResponse($response);
-    die();
+if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+    sendJsonResponse(['status' => 'failed', 'message' => 'Invalid request method.']);
+    exit();
 }
 
 include_once("dbconnect.php");
 
-$results_per_page = 6; // Set the number of questions per page
-if (isset($_POST['pageno'])) {
-    $pageno = (int)$_POST['pageno'];
-} else {
-    $pageno = 1;
-}
+$user_id = $_POST['user_id'] ?? null;
+$load_type = $_POST['load_type'] ?? 'all';
+$results_per_page = 6;
+$pageno = isset($_POST['pageno']) ? (int)$_POST['pageno'] : 1;
 $page_first_result = ($pageno - 1) * $results_per_page;
+$search = isset($_POST['search']) ? '%' . $conn->real_escape_string($_POST['search']) . '%' : "%";
 
-// Modify or add any additional conditions based on your use case
-if (isset($_POST['search'])) {
-    $search = $_POST['search'];
-    $sqlloadquestions = "SELECT * FROM tbl_questions WHERE question_title LIKE '%$search%' 
-                         OR question_content LIKE '%$search%'";
-} else {
-    $sqlloadquestions = "SELECT * FROM tbl_questions";
+// Base SQL
+$sqlBase = "FROM tbl_questions q";
+$sqlWhere = " WHERE 1";
+
+if ($load_type === 'user_specific' && $user_id) {
+    $sqlWhere .= " AND q.user_id = ?";
 }
 
-// Get total number of questions (for pagination)
-$result = $conn->query($sqlloadquestions);
-$number_of_result = $result->num_rows;
+if (!empty($_POST['search'])) {
+    $sqlWhere .= " AND (q.question_title LIKE ? OR q.question_content LIKE ?)";
+}
+
+$sqlLimit = " ORDER BY q.question_id DESC LIMIT ?, ?";
+
+// Prepare statement for count
+$stmtCount = $conn->prepare("SELECT COUNT(*) AS total $sqlBase $sqlWhere");
+if ($load_type === 'user_specific' && $user_id) {
+    $stmtCount->bind_param("s", $user_id);
+}
+if (!empty($_POST['search'])) {
+    $stmtCount->bind_param("ss", $search, $search);
+}
+$stmtCount->execute();
+$resultCount = $stmtCount->get_result();
+$row = $resultCount->fetch_assoc();
+$number_of_result = $row['total'];
 $number_of_page = ceil($number_of_result / $results_per_page);
 
-// Query for the current page
-$sqlloadquestions = $sqlloadquestions . " ORDER BY question_id ASC LIMIT $page_first_result, $results_per_page";
-$result = $conn->query($sqlloadquestions);
+// Prepare statement for questions fetch
+$stmtQuestions = $conn->prepare("SELECT q.question_id, q.user_id, q.question_title, q.question_content $sqlBase $sqlWhere $sqlLimit");
+if ($load_type === 'user_specific' && $user_id) {
+    $stmtQuestions->bind_param("s", $user_id);
+}
+if (!empty($_POST['search'])) {
+    $stmtQuestions->bind_param("ss", $search, $search);
+}
+$stmtQuestions->bind_param("ii", $page_first_result, $results_per_page);
+$stmtQuestions->execute();
+$result = $stmtQuestions->get_result();
 
 if ($result->num_rows > 0) {
-    $questions["questions"] = array();
+    $questions = array();
     while ($row = $result->fetch_assoc()) {
-        $questionlist = array();
-        $questionlist['question_id'] = $row['question_id'];
-        $questionlist['user_id'] = $row['user_id'];
-        $questionlist['user_name'] = $row['user_name']; // Adjust this line based on your database schema
-        $questionlist['question_title'] = $row['question_title'];
-        $questionlist['question_content'] = $row['question_content'];
-        array_push($questions["questions"], $questionlist);
+        $questions[] = $row;
     }
-    $response = array('status' => 'success', 'data' => $questions, 'numofpage' => "$number_of_page", 'numberofresult' => "$number_of_result");
-    sendJsonResponse($response);
+    sendJsonResponse(['status' => 'success', 'data' => ['questions' => $questions, 'numofpage' => $number_of_page, 'numberofresult' => $number_of_result]]);
 } else {
-    $response = array('status' => 'failed', 'data' => null);
-    sendJsonResponse($response);
+    sendJsonResponse(['status' => 'failed', 'message' => 'No questions found.']);
 }
 
-function sendJsonResponse($sentArray) {
+function sendJsonResponse($data) {
     header('Content-Type: application/json');
-    echo json_encode($sentArray);
+    echo json_encode($data);
 }
 ?>

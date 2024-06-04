@@ -1,0 +1,4 @@
+Exception has occurred.
+_Exception (Exception: Failed to load comments)
+
+These are the columns in tbl_comment: `comment_id`, `user_id`, `question_id`, `user_profile_pic`, `comment_text`, `upvotes`, `downvotes`, `created_at`, `updated_at` . Can you fix the error?

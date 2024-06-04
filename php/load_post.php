@@ -1,54 +1,47 @@
 <?php
-if (!isset($_POST)) {
-    $response = array('status' => 'failed', 'data' => null);
-    sendJsonResponse($response);
-    die();
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    sendJsonResponse(array('status' => 'failed', 'data' => null));
+    exit();
 }
 
 include_once("dbconnect.php");
 
-$results_per_page = 6; // Set the number of posts per page
-if (isset($_POST['pageno'])) {
-    $pageno = (int)$_POST['pageno'];
-} else {
-    $pageno = 1;
-}
+$user_id = $_POST['user_id'];
+$results_per_page = 6;
+$pageno = isset($_POST['pageno']) ? (int)$_POST['pageno'] : 1;
 $page_first_result = ($pageno - 1) * $results_per_page;
+$search = isset($_POST['search']) ? $conn->real_escape_string($_POST['search']) : "";
 
-// Modify or add any additional conditions based on your use case
-if (isset($_POST['search'])) {
-    $search = $_POST['search'];
-    $sqlloadposts = "SELECT * FROM tbl_posts WHERE post_title LIKE '%$search%' 
-                     OR post_content LIKE '%$search%'";
-} else {
-    $sqlloadposts = "SELECT * FROM tbl_posts";
-}
+// Construct SQL query based on whether search term is provided
+$sqlBase = "FROM tbl_posts p ";
+$sqlWhere = $search !== "" ? "WHERE p.post_title LIKE '%$search%' OR p.post_content LIKE '%$search%'" : "";
+$sqlLimit = "ORDER BY p.post_id ASC LIMIT $page_first_result, $results_per_page";
 
-// Get total number of posts (for pagination)
-$result = $conn->query($sqlloadposts);
-$number_of_result = $result->num_rows;
+// Count total posts for pagination
+$sqlCount = "SELECT COUNT(*) AS total " . $sqlBase . $sqlWhere;
+$resultCount = $conn->query($sqlCount);
+$row = $resultCount->fetch_assoc();
+$number_of_result = $row['total'];
 $number_of_page = ceil($number_of_result / $results_per_page);
 
-// Query for the current page
-$sqlloadposts = $sqlloadposts . " ORDER BY post_id ASC LIMIT $page_first_result, $results_per_page";
-$result = $conn->query($sqlloadposts);
+// Fetch posts and likes data
+$sqlLoadPosts = "SELECT p.*, 
+                        (SELECT COUNT(*) FROM tbl_post_likes WHERE post_id = p.post_id) AS likes, 
+                        (SELECT user_has_liked FROM tbl_post_likes WHERE post_id = p.post_id AND user_id = '$user_id') AS userHasLiked 
+                 " . $sqlBase . $sqlWhere . $sqlLimit;
+
+$result = $conn->query($sqlLoadPosts);
 
 if ($result->num_rows > 0) {
-    $posts["posts"] = array();
+    $posts = array();
     while ($row = $result->fetch_assoc()) {
-        $postlist = array();
-        $postlist['post_id'] = $row['post_id'];
-        $postlist['user_id'] = $row['user_id'];
-        $postlist['user_name'] = $row['user_name'];
-        $postlist['post_title'] = $row['post_title'];
-        $postlist['post_content'] = $row['post_content'];
-        array_push($posts["posts"], $postlist);
+        // Cast userHasLiked to boolean
+        $row['userHasLiked'] = $row['userHasLiked'] == 1 ? 1 : 0;
+        $posts[] = $row;
     }
-    $response = array('status' => 'success', 'data' => $posts, 'numofpage' => "$number_of_page", 'numberofresult' => "$number_of_result");
-    sendJsonResponse($response);
+    sendJsonResponse(array('status' => 'success', 'data' => array("posts" => $posts), 'numofpage' => $number_of_page, 'numberofresult' => $number_of_result));
 } else {
-    $response = array('status' => 'failed', 'data' => null);
-    sendJsonResponse($response);
+    sendJsonResponse(array('status' => 'failed', 'data' => null));
 }
 
 function sendJsonResponse($sentArray) {
