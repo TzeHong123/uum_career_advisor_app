@@ -157,7 +157,8 @@ class _AdviceTabScreenState extends State<AdviceTabScreen>
           ? FloatingActionButton(
               onPressed: () {
                 if (_tabController.index == 0) {
-                  if (_checkUserRole() == 'senior') {
+                  if (_checkUserRole() == 'senior' &&
+                      widget.user.name == 'admin') {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -172,7 +173,7 @@ class _AdviceTabScreenState extends State<AdviceTabScreen>
                         return AlertDialog(
                           title: Text("Restricted Access"),
                           content: Text(
-                              "Sorry, students are not allowed to create advice posts."),
+                              "Sorry, only admin is allowed to create new advice banner."),
                           actions: <Widget>[
                             TextButton(
                               child: Text("OK"),
