@@ -14,6 +14,8 @@ import 'package:uum_career_advisor_app/views/screens/registrationscreen.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
+import 'SavedPostsScreen.dart';
+
 // for profile screen
 
 class ProfileTabScreen extends StatefulWidget {
@@ -152,6 +154,7 @@ class _ProfileTabScreenState extends State<ProfileTabScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          _settingButton("SAVED POSTS", _navigateToSavedPosts),
           _settingButton("CHANGE NAME", isDisable ? null : _updateNameDialog),
           _settingButton(
               "CHANGE PHONE NUMBER", isDisable ? null : _updatePhoneDialog),
@@ -174,6 +177,14 @@ class _ProfileTabScreenState extends State<ProfileTabScreen> {
           borderRadius: BorderRadius.circular(8),
         ),
       ),
+    );
+  }
+
+  void _navigateToSavedPosts() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => SavedPostsScreen(user: widget.user)),
     );
   }
 

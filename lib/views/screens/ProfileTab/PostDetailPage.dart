@@ -143,36 +143,6 @@ class _PostDetailPageState extends State<PostDetailPage> {
                 },
               ),
               SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  IconButton(
-                    icon: Icon(
-                      widget.post.userHasLiked == 1
-                          ? Icons.thumb_up
-                          : Icons.thumb_up_alt_outlined,
-                      color: widget.post.userHasLiked == 1
-                          ? Colors.blue
-                          : Colors.grey,
-                    ),
-                    onPressed: () {
-                      toggleLike(widget.post);
-                    },
-                  ),
-                  Text('${widget.post.likes} Likes'),
-                  IconButton(
-                    icon: Icon(
-                      widget.post.isFavorite
-                          ? Icons.favorite
-                          : Icons.favorite_border,
-                      color: widget.post.isFavorite ? Colors.red : Colors.grey,
-                    ),
-                    onPressed: () {
-                      toggleFavourite(widget.post);
-                    },
-                  ),
-                ],
-              ),
               SizedBox(height: 20),
             ],
           ),
@@ -311,36 +281,22 @@ class _PostDetailPageState extends State<PostDetailPage> {
     }
   }
 
-  void toggleFavourite(Post post) async {
-    setState(() {
-      post.isFavorite = !post.isFavorite;
-    });
-
-    String isFavorite = post.isFavorite ? '1' : '0';
-
+  Future<void> addToFavourites(String postId) async {
+    var url = Uri.parse(
+        "${MyConfig().SERVER}/uum_career_advisor_app/php/add_to_favourites.php");
     try {
-      final response = await http.post(
-        Uri.parse(
-            "${MyConfig().SERVER}/uum_career_advisor_app/php/toggle_favourite.php"),
-        body: {
-          'post_id': post.postId,
-          'user_id': widget.user.id,
-          'is_favorite': isFavorite,
-        },
-      );
-
-      if (response.statusCode == 200) {
-        var jsonData = json.decode(response.body);
-        if (jsonData['status'] == 'success') {
-          print(jsonData['message']);
-        } else {
-          print(jsonData['message']);
-        }
+      var response = await http.post(url, body: {
+        'user_id': widget.user.id, // Substitute with actual user ID logic
+        'post_id': postId,
+      });
+      var jsonData = json.decode(response.body);
+      if (jsonData['status'] == 'success') {
+        print(jsonData['message']);
       } else {
-        print("Server error: ${response.statusCode}");
+        print(jsonData['message']);
       }
     } catch (e) {
-      print("Error occurred: $e");
+      print(e.toString());
     }
   }
 }

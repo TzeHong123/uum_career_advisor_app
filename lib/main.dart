@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'UUM Career Advisor',
       theme: ThemeData(
-        primarySwatch: Colors.purple,
+        primarySwatch: Colors.blueGrey,
         textTheme: GoogleFonts.aBeeZeeTextTheme(
           Theme.of(context)
               .textTheme, // If this is not set, then ThemeData.light().textTheme is used.

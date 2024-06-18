@@ -205,6 +205,7 @@ class _AdviceTabScreenState extends State<AdviceTabScreen>
         print('Post Title: ${post.postTitle}');
         print('Post Likes: ${post.likes}');
         print('User Has Liked: ${post.userHasLiked}');
+        print('Is Favorite: ${post.isFavorite}');
         return InkWell(
           onTap: () {
             Navigator.push(
@@ -269,7 +270,7 @@ class _AdviceTabScreenState extends State<AdviceTabScreen>
                         color: post.isFavorite ? Colors.red : Colors.grey,
                       ),
                       onPressed: () {
-                        addToFavourites(post.postId.toString());
+                        toggleFavourite(post);
                       },
                     ),
                   ],
@@ -319,22 +320,36 @@ class _AdviceTabScreenState extends State<AdviceTabScreen>
     }
   }
 
-  Future<void> addToFavourites(String postId) async {
-    var url = Uri.parse(
-        "${MyConfig().SERVER}/uum_career_advisor_app/php/add_to_favourites.php");
+  void toggleFavourite(Post post) async {
+    setState(() {
+      post.isFavorite = !post.isFavorite;
+    });
+
+    String isFavorite = post.isFavorite ? '1' : '0';
+
     try {
-      var response = await http.post(url, body: {
-        'user_id': widget.user.id,
-        'post_id': postId,
-      });
-      var jsonData = json.decode(response.body);
-      if (jsonData['status'] == 'success') {
-        print(jsonData['message']);
+      final response = await http.post(
+        Uri.parse(
+            "${MyConfig().SERVER}/uum_career_advisor_app/php/toggle_favourite.php"),
+        body: {
+          'post_id': post.postId,
+          'user_id': widget.user.id,
+          'is_favorite': isFavorite,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        var jsonData = json.decode(response.body);
+        if (jsonData['status'] == 'success') {
+          print(jsonData['message']);
+        } else {
+          print(jsonData['message']);
+        }
       } else {
-        print(jsonData['message']);
+        print("Server error: ${response.statusCode}");
       }
     } catch (e) {
-      print(e.toString());
+      print("Error occurred: $e");
     }
   }
 
