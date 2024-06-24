@@ -1,3 +1,4 @@
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:uum_career_advisor_app/myconfig.dart';
@@ -309,14 +310,28 @@ class _AdviceTabScreenState extends State<AdviceTabScreen>
       if (response.statusCode == 200) {
         // Handle successful response
         print("Like status updated successfully");
+        Fluttertoast.showToast(
+            msg: "Like status updated!",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            fontSize: 16.0);
       } else {
         // Handle server error
         print(
             "Failed to update like status, server returned: ${response.statusCode}");
+        Fluttertoast.showToast(
+            msg: "Failed to like the post",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            fontSize: 16.0);
       }
     } catch (e) {
       // Handle error
       print("Error updating like status: $e");
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("Error occured!")));
     }
   }
 
@@ -342,11 +357,29 @@ class _AdviceTabScreenState extends State<AdviceTabScreen>
         var jsonData = json.decode(response.body);
         if (jsonData['status'] == 'success') {
           print(jsonData['message']);
+          Fluttertoast.showToast(
+              msg: "Saved to favourite!",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              fontSize: 16.0);
         } else {
           print(jsonData['message']);
+          Fluttertoast.showToast(
+              msg: "Failed to add to favourite",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              fontSize: 16.0);
         }
       } else {
         print("Server error: ${response.statusCode}");
+        Fluttertoast.showToast(
+            msg: "Server error, please check your internet connection.",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            fontSize: 16.0);
       }
     } catch (e) {
       print("Error occurred: $e");

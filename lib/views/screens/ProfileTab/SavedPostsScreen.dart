@@ -48,11 +48,16 @@ class _SavedPostsScreenState extends State<SavedPostsScreen> {
           });
         } else {
           setState(() {
+            ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text("Failed to load saved posts!")));
             errorMessage = jsondata['message'] ?? 'Failed to load saved posts';
             isLoading = false;
           });
         }
       } else {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content:
+                Text("Server error, please check your internet connection")));
         setState(() {
           errorMessage = 'Server error: ${response.statusCode}';
           isLoading = false;

@@ -115,7 +115,9 @@ class _PostCreationPageState extends State<PostCreationPage> {
                             // print(user.name);
                             // print(user.email);
                             ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text("Post Created!")));
+                                const SnackBar(
+                                    content:
+                                        Text("Post Created Successfully!")));
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:uum_career_advisor_app/models/advice.dart';
 import 'package:uum_career_advisor_app/models/post.dart';
 import 'package:http/http.dart' as http;
@@ -270,11 +271,25 @@ class _PostDetailPageState extends State<PostDetailPage> {
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
         print("Advice added successfully: ${data['message']}");
+        Fluttertoast.showToast(
+            msg: "Advice added successfully!",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            fontSize: 16.0);
       } else {
         print("Failed to add advice: Status code ${response.statusCode}");
+        Fluttertoast.showToast(
+            msg: "Failed to add advice",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            fontSize: 16.0);
       }
     } catch (e) {
       print("Error when adding advice: $e");
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Error occured when trying to add advice")));
     }
   }
 
@@ -333,8 +348,20 @@ class _PostDetailPageState extends State<PostDetailPage> {
         var jsonData = json.decode(response.body);
         if (jsonData['status'] == 'success') {
           print(jsonData['message']);
+          Fluttertoast.showToast(
+              msg: "Saved to Favourite!",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              fontSize: 16.0);
         } else {
           print(jsonData['message']);
+          Fluttertoast.showToast(
+              msg: "Failed to save to favourite",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              fontSize: 16.0);
         }
       } else {
         print("Server error: ${response.statusCode}");

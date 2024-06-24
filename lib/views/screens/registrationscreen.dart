@@ -233,6 +233,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             Expanded(
                                 child: ElevatedButton(
                                     onPressed: onRegisterDialog,
+                                    style: ElevatedButton.styleFrom(
+                                      primary:
+                                          Colors.purple, // background color
+                                      onPrimary: Colors.white, // text color
+                                    ),
                                     child: const Text("Register")))
                           ],
                         )
@@ -351,10 +356,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           var jsondata = jsonDecode(response.body);
           if (jsondata['status'] == 'success') {
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                content: Text(
-                    "Registration Success. Returning to Login Page in a minute...")));
+                content:
+                    Text("Registration Success. Returning to Login Page...")));
             Timer(
-                const Duration(seconds: 5),
+                const Duration(seconds: 3),
                 () => Navigator.pushReplacement(context,
                     MaterialPageRoute(builder: (content) => LoginScreen())));
           } else {

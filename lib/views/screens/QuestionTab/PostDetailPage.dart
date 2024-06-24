@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:uum_career_advisor_app/models/comment.dart';
@@ -106,8 +107,20 @@ class _PostDetailPageState extends State<PostDetailPage> {
 
       if (response.statusCode == 200) {
         print('Comment added successfully');
+        Fluttertoast.showToast(
+            msg: "Comment added!",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            fontSize: 16.0);
       } else {
         print('Failed to add comment');
+        Fluttertoast.showToast(
+            msg: "Failed to add comment",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            fontSize: 16.0);
       }
     } catch (e) {
       print('Error occurred: $e');
@@ -191,12 +204,12 @@ class CommentWidget extends StatelessWidget {
 
       if (response.statusCode == 200) {
         print('Comment upvoted successfully');
-        // Show a SnackBar message to indicate success
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: const Text('Upvote Success!'),
-          ),
-        );
+        Fluttertoast.showToast(
+            msg: "Upvoted the comment!",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            fontSize: 16.0);
         // Update the local data or UI
         onUpdate(comment);
       } else {
@@ -207,7 +220,7 @@ class CommentWidget extends StatelessWidget {
     }
   }
 
-  Future<void> downvoteComment(String commentId) async {
+  Future<void> downvoteComment(BuildContext context, String commentId) async {
     var url = Uri.parse(
         "${MyConfig().SERVER}/uum_career_advisor_app/php/downvote_comment.php");
     try {
@@ -217,7 +230,14 @@ class CommentWidget extends StatelessWidget {
       });
       if (response.statusCode == 200) {
         print('Comment downvoted successfully');
+        Fluttertoast.showToast(
+            msg: "Downvoted the comment!",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            fontSize: 16.0);
         // Update the local data or UI
+
         onUpdate(
             comment); // Call the callback function with the updated comment
       } else {
@@ -258,7 +278,7 @@ class CommentWidget extends StatelessWidget {
                 IconButton(
                   icon: Icon(Icons.thumb_down, color: Colors.red),
                   onPressed: () {
-                    downvoteComment(comment.commentId!);
+                    downvoteComment(context, comment.commentId!);
                   },
                 ),
                 Text('${comment.downvotes}'),

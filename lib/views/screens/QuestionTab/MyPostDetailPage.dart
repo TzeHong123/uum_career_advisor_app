@@ -1,13 +1,18 @@
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
+import 'package:uum_career_advisor_app/models/user.dart';
 import 'dart:convert';
 import 'package:uum_career_advisor_app/myconfig.dart';
 import 'package:flutter/material.dart';
-import 'package:uum_career_advisor_app/models/question.dart'; // Import your Question model
+import 'package:uum_career_advisor_app/models/question.dart';
+import 'package:uum_career_advisor_app/views/screens/QuestionTab/Questiontabscreen.dart'; // Import your Question model
 
 class MyPostDetailPage extends StatefulWidget {
   final Question question;
+  final User user;
 
-  MyPostDetailPage({Key? key, required this.question}) : super(key: key);
+  MyPostDetailPage({Key? key, required this.user, required this.question})
+      : super(key: key);
 
   @override
   _MyPostDetailPageState createState() => _MyPostDetailPageState();
@@ -65,7 +70,18 @@ class _MyPostDetailPageState extends State<MyPostDetailPage> {
     });
 
     if (response.body == 'success') {
-      Navigator.pop(context); // Pop the context after deletion
+      Fluttertoast.showToast(
+          msg: "Question Deleted!",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          fontSize: 16.0);
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (content) => QuestionTabScreen(
+                    user: widget.user,
+                  )));
     } else {
       // Handle error
       print('Failed to delete post');

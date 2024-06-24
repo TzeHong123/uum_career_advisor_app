@@ -125,7 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           children: [
                             Checkbox(
                               //checkColor: Colors.white,
-                              //activeColor: Colors.red,
+                              activeColor: Colors.purple,
                               value: _isChecked,
                               onChanged: (bool? value) {
                                 saveremovepref(value!);
@@ -151,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               height: 50,
                               elevation: 10,
                               onPressed: onLogin,
-                              color: Theme.of(context).colorScheme.primary,
+                              color: Colors.purple,
                               textColor: Theme.of(context).colorScheme.onError,
                               child: const Text('Login'),
                             ),

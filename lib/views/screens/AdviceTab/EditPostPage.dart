@@ -1,3 +1,4 @@
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:uum_career_advisor_app/myconfig.dart';
@@ -63,6 +64,12 @@ class _MyPostDetailPageState extends State<MyPostDetailPage> {
     });
 
     if (response.body == 'success') {
+      Fluttertoast.showToast(
+          msg: "Post deleted successfully!",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          fontSize: 16.0);
       Navigator.pop(context); // Pop the context after deletion
     } else {
       // Handle error

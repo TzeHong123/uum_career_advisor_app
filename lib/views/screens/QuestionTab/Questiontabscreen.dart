@@ -91,7 +91,8 @@ class _QuestionTabScreenState extends State<QuestionTabScreen>
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => MyPostDetailPage(question: question),
+                builder: (context) =>
+                    MyPostDetailPage(user: widget.user, question: question),
               ),
             );
           },
@@ -229,67 +230,6 @@ class _QuestionTabScreenState extends State<QuestionTabScreen>
       },
     );
   }
-
-  // //Function for handling backend for updating post like status
-  // void toggleLike(Post post) async {
-  //   // Assuming your User model has a userId attribute that stores the user ID
-  //   String? userId = widget.user.id;
-  //   print("Sending like status update for user_id: $userId");
-
-  //   // Update the UI immediately
-  //   setState(() {
-  //     post.userHasLiked = post.userHasLiked == 1 ? 0 : 1;
-  //     post.likes += post.userHasLiked == 1 ? 1 : -1;
-  //   });
-
-  //   // Send the update to the backend
-  //   try {
-  //     final response = await http.post(
-  //       Uri.parse(
-  //           "${MyConfig().SERVER}/uum_career_advisor_app/php/update_post_likes.php"),
-  //       body: {
-  //         'post_id': post.postId.toString(),
-  //         'user_id': userId,
-  //         'user_has_liked': post.userHasLiked
-  //             .toString(), // Corrected to send userHasLiked status
-  //       },
-  //     );
-
-  //     if (response.statusCode == 200) {
-  //       // Handle successful response
-  //       print("Like status updated successfully");
-  //     } else {
-  //       // Handle server error
-  //       print(
-  //           "Failed to update like status, server returned: ${response.statusCode}");
-  //     }
-  //   } catch (e) {
-  //     // Handle error
-  //     print("Error updating like status: $e");
-  //   }
-  // }
-
-  // Future<void> addToFavourites(String postId) async {
-  //   var url = Uri.parse(
-  //       "${MyConfig().SERVER}/uum_career_advisor_app/php/add_to_favourites.php");
-  //   try {
-  //     var response = await http.post(url, body: {
-  //       'user_id': widget.user.id,
-  //       'post_id': postId,
-  //     });
-  //     var jsonData = json.decode(response.body);
-  //     if (jsonData['status'] == 'success') {
-  //       // Update UI or show a message
-  //       print(jsonData['message']);
-  //     } else {
-  //       // Handle failure
-  //       print(jsonData['message']);
-  //     }
-  //   } catch (e) {
-  //     // Handle error
-  //     print(e.toString());
-  //   }
-  // }
 
   void _searchPost(String query) {
     final filteredQuestions = questions.where((question) {
