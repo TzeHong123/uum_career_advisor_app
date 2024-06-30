@@ -117,7 +117,8 @@ class _ProfileTabScreenState extends State<ProfileTabScreen> {
       child: CircleAvatar(
         radius: 50,
         backgroundImage: _image == null
-            ? AssetImage('assets/images/profile.png')
+            ? NetworkImage(
+                "${MyConfig().SERVER}/uum_career_advisor_app/php/assets/profile/${widget.user.profilePicture}")
             : FileImage(_image!) as ImageProvider,
       ),
     );
@@ -188,46 +189,39 @@ class _ProfileTabScreenState extends State<ProfileTabScreen> {
     );
   }
 
-  _updateImageDialog() {
-    if (widget.user.id == "na") {
-      Fluttertoast.showToast(
-          msg: "Please login/register your account first",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
-          fontSize: 16.0);
-      return;
-    }
+  void _updateImageDialog() {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        // return object of type Dialog
         return AlertDialog(
-            title: const Text(
-              "Select from",
-            ),
-            content: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                TextButton.icon(
-                    onPressed: () => {
-                          Navigator.of(context).pop(),
-                          _galleryPicker(),
-                        },
-                    icon: const Icon(Icons.browse_gallery),
-                    label: const Text("Gallery")),
-                TextButton.icon(
-                    onPressed: () =>
-                        {Navigator.of(context).pop(), _cameraPicker()},
-                    icon: const Icon(Icons.camera_alt),
-                    label: const Text("Camera")),
-              ],
-            ));
+          title: const Text("Select an option"),
+          content: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              TextButton.icon(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  _galleryPicker();
+                },
+                icon: const Icon(Icons.photo_library),
+                label: const Text("Gallery"),
+              ),
+              TextButton.icon(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  _cameraPicker();
+                },
+                icon: const Icon(Icons.camera_alt),
+                label: const Text("Camera"),
+              ),
+            ],
+          ),
+        );
       },
     );
   }
 
-  _galleryPicker() async {
+  void _galleryPicker() async {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(
       source: ImageSource.gallery,
@@ -240,7 +234,7 @@ class _ProfileTabScreenState extends State<ProfileTabScreen> {
     }
   }
 
-  _cameraPicker() async {
+  void _cameraPicker() async {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(
       source: ImageSource.camera,
@@ -278,36 +272,56 @@ class _ProfileTabScreenState extends State<ProfileTabScreen> {
     }
   }
 
-  void _updateProfileImage(image) {
-    String base64Image = base64Encode(image!.readAsBytesSync());
-    http.post(
+  void _updateProfileImage(File? imageFile) async {
+    if (imageFile == null) return;
+
+    try {
+      String base64Image = base64Encode(imageFile.readAsBytesSync());
+
+      var response = await http.post(
         Uri.parse(
-            "${MyConfig().SERVER}/uum_career_advisor_app/php/update_profile.php"),
+            "${MyConfig().SERVER}/uum_career_advisor_app/php/update_profile_picture.php"),
         body: {
           "userid": widget.user.id,
           "image": base64Image,
-        }).then((response) {
-      var jsondata = jsonDecode(response.body);
-      if (response.statusCode == 200 && jsondata['status'] == 'success') {
-        Fluttertoast.showToast(
-            msg: "Success",
+        },
+      );
+
+      if (response.statusCode == 200) {
+        var jsonData = jsonDecode(response.body);
+        if (jsonData['status'] == 'success') {
+          setState(() {
+            widget.user.profilePicture = jsonData['profile_picture'];
+          });
+          Fluttertoast.showToast(
+            msg: "Profile picture updated successfully",
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
-            fontSize: 16.0);
-        val = random.nextInt(1000);
-        setState(() {});
-        DefaultCacheManager manager = DefaultCacheManager();
-        manager.emptyCache(); //clears all data in cache.
+            fontSize: 16.0,
+          );
+        } else {
+          Fluttertoast.showToast(
+            msg: "Failed to update profile picture",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            fontSize: 16.0,
+          );
+        }
       } else {
-        Fluttertoast.showToast(
-            msg: "Failed",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            fontSize: 16.0);
+        throw Exception("Failed to connect to server");
       }
-    });
+    } catch (e) {
+      print("Error updating profile picture: $e");
+      Fluttertoast.showToast(
+        msg: "Failed to update profile picture",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        fontSize: 16.0,
+      );
+    }
   }
 
   void _updateNameDialog() {

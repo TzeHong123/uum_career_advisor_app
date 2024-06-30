@@ -26,8 +26,8 @@ class Comment {
       questionId: json['question_id']?.toString(),
       userProfilePic: json['user_profile_pic'],
       commentText: json['comment_text'],
-      upvotes: json['upvotes'] ?? 0,
-      downvotes: json['downvotes'] ?? 0,
+      upvotes: int.tryParse(json['upvotes']?.toString() ?? '0') ?? 0,
+      downvotes: int.tryParse(json['downvotes']?.toString() ?? '0') ?? 0,
       username: json['username'],
     );
   }

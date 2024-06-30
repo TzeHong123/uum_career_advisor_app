@@ -245,6 +245,14 @@ class _PostDetailPageState extends State<PostDetailPage> {
                     companyNameController.text,
                   );
                   Navigator.of(context).pop();
+                } else {
+                  // Show alert message for user to fill in all the fields
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Please fill in all the fields.'),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
                 }
               },
             ),

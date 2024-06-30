@@ -4,7 +4,7 @@ import 'package:uum_career_advisor_app/myconfig.dart';
 import 'package:flutter/material.dart';
 import 'package:uum_career_advisor_app/models/question.dart';
 import 'package:uum_career_advisor_app/views/screens/QuestionTab/MyPostDetailPage.dart';
-import 'package:uum_career_advisor_app/views/screens/QuestionTab/PostDetailPage.dart';
+import 'package:uum_career_advisor_app/views/screens/QuestionTab/QuestionDetailPage.dart';
 import 'package:uum_career_advisor_app/views/screens/QuestionTab/QuestionCreationPage.dart';
 import 'package:uum_career_advisor_app/models/user.dart';
 
@@ -201,7 +201,7 @@ class _QuestionTabScreenState extends State<QuestionTabScreen>
               context,
               MaterialPageRoute(
                 builder: (context) =>
-                    PostDetailPage(user: widget.user, question: question),
+                    QuestionDetailPage(user: widget.user, question: question),
               ),
             );
           },

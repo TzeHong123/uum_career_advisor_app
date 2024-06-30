@@ -7,18 +7,19 @@ import 'package:uum_career_advisor_app/models/question.dart';
 import 'package:uum_career_advisor_app/models/user.dart';
 import 'package:uum_career_advisor_app/myconfig.dart';
 
-class PostDetailPage extends StatefulWidget {
+class QuestionDetailPage extends StatefulWidget {
   final User user;
   final Question question;
 
-  const PostDetailPage({Key? key, required this.user, required this.question})
+  const QuestionDetailPage(
+      {Key? key, required this.user, required this.question})
       : super(key: key);
 
   @override
-  State<PostDetailPage> createState() => _PostDetailPageState();
+  State<QuestionDetailPage> createState() => _QuestionDetailPageState();
 }
 
-class _PostDetailPageState extends State<PostDetailPage> {
+class _QuestionDetailPageState extends State<QuestionDetailPage> {
   late TextEditingController commentController;
   List<Comment> comments = [];
 
@@ -185,6 +186,7 @@ class CommentWidget extends StatelessWidget {
   final Comment comment;
   final User user;
   final Function(Comment) onUpdate; // Callback function
+
   const CommentWidget({
     Key? key,
     required this.comment,
@@ -203,31 +205,69 @@ class CommentWidget extends StatelessWidget {
       });
 
       if (response.statusCode == 200) {
-        print('Comment upvoted successfully');
+        var jsonResponse = json.decode(response.body);
+        if (jsonResponse['status'] == 'success') {
+          print('Comment upvoted successfully');
+          Fluttertoast.showToast(
+              msg: "Upvoted the comment!",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              fontSize: 16.0);
+          // Fetch the updated comment and refresh the UI
+          fetchSingleComment(commentId).then((updatedComment) {
+            onUpdate(updatedComment);
+          });
+        } else {
+          print('Failed to upvote comment: ${jsonResponse['message']}');
+          Fluttertoast.showToast(
+              msg: jsonResponse['message'],
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              fontSize: 16.0);
+        }
+      } else {
+        print('Failed to upvote comment');
         Fluttertoast.showToast(
-            msg: "Upvoted the comment!",
+            msg: "Failed to upvote comment",
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
             fontSize: 16.0);
-        // Update the local data or UI
-        onUpdate(comment);
-      } else {
-        print('Failed to upvote comment');
       }
     } catch (e) {
       print('Error occurred while upvoting comment: $e');
     }
   }
 
+  Future<Comment> fetchSingleComment(String commentId) async {
+    var url = Uri.parse(
+        "${MyConfig().SERVER}/uum_career_advisor_app/php/fetch_single_comment.php?comment_id=$commentId");
+    var response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      var jsonResponse = json.decode(response.body);
+      if (jsonResponse['status'] == 'success') {
+        return Comment.fromJson(jsonResponse['data']);
+      } else {
+        throw Exception(jsonResponse['message']);
+      }
+    } else {
+      throw Exception('Failed to load comment');
+    }
+  }
+
   Future<void> downvoteComment(BuildContext context, String commentId) async {
     var url = Uri.parse(
         "${MyConfig().SERVER}/uum_career_advisor_app/php/downvote_comment.php");
+
     try {
       var response = await http.post(url, body: {
         'comment_id': commentId,
-        'user_id': user.id,
+        'user_id': user.id!,
       });
+
       if (response.statusCode == 200) {
         print('Comment downvoted successfully');
         Fluttertoast.showToast(
@@ -236,15 +276,33 @@ class CommentWidget extends StatelessWidget {
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
             fontSize: 16.0);
-        // Update the local data or UI
 
-        onUpdate(
-            comment); // Call the callback function with the updated comment
+        // Fetch the updated comment and refresh the UI
+        fetchSingleComment(commentId).then((updatedComment) {
+          onUpdate(updatedComment);
+        });
       } else {
         print('Failed to downvote comment');
       }
     } catch (e) {
       print('Error occurred while downvoting comment: $e');
+    }
+  }
+
+  Future<Comment> fetchUpdatedComment(String commentId) async {
+    var url = Uri.parse(
+        "${MyConfig().SERVER}/uum_career_advisor_app/php/fetch_single_comment.php?comment_id=$commentId");
+    var response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      var jsonResponse = json.decode(response.body);
+      if (jsonResponse['status'] == 'success') {
+        return Comment.fromJson(jsonResponse['data']);
+      } else {
+        throw Exception(jsonResponse['message']);
+      }
+    } else {
+      throw Exception('Failed to load comment');
     }
   }
 

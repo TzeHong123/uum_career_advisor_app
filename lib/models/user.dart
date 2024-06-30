@@ -7,17 +7,18 @@ class User {
   String? otp;
   String? datereg;
   String? role;
+  String? profilePicture;
 
-  User({
-    this.id,
-    this.email,
-    this.name,
-    this.phone,
-    this.password,
-    this.otp,
-    this.datereg,
-    this.role,
-  });
+  User(
+      {this.id,
+      this.email,
+      this.name,
+      this.phone,
+      this.password,
+      this.otp,
+      this.datereg,
+      this.role,
+      this.profilePicture});
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -28,6 +29,7 @@ class User {
     otp = json['otp'];
     datereg = json['datereg'];
     role = json['role'];
+    profilePicture = json['profilePicture'];
   }
 
   Map<String, dynamic> toJson() {
@@ -40,6 +42,7 @@ class User {
     data['otp'] = otp;
     data['datereg'] = datereg;
     data['role'] = role;
+    data['profilePicture'] = profilePicture;
 
     return data;
   }
