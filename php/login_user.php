@@ -24,6 +24,7 @@ if ($result->num_rows > 0) {
 		$userarray['otp'] = $row['user_otp'];
 		$userarray['datereg'] = $row['user_datereg'];
 		$userarray['role'] = $row['user_role'];	
+		$userarray['profilePicture'] = $row['profile_picture'];	
 		$response = array('status' => 'success', 'data' => $userarray);
 		sendJsonResponse($response);
 	}
