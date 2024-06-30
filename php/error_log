@@ -1,0 +1,212 @@
+[05-Jun-2024 07:30:20 UTC] PHP Notice:  Undefined index: email in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/login_user.php on line 8
+[05-Jun-2024 07:30:20 UTC] PHP Notice:  Undefined index: password in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/login_user.php on line 9
+[05-Jun-2024 07:32:04 UTC] PHP Notice:  Undefined index: userid in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_user.php on line 8
+[05-Jun-2024 07:32:07 UTC] PHP Notice:  Undefined index: email in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/login_user.php on line 8
+[05-Jun-2024 07:32:07 UTC] PHP Notice:  Undefined index: password in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/login_user.php on line 9
+[09-Jun-2024 15:09:20 UTC] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on bool in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/upvote_comment.php:18
+Stack trace:
+#0 {main}
+  thrown in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/upvote_comment.php on line 18
+[09-Jun-2024 15:09:23 UTC] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on bool in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/upvote_comment.php:18
+Stack trace:
+#0 {main}
+  thrown in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/upvote_comment.php on line 18
+[12-Jun-2024 02:03:14 UTC] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on bool in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/upvote_comment.php:18
+Stack trace:
+#0 {main}
+  thrown in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/upvote_comment.php on line 18
+[18-Jun-2024 14:39:17 UTC] PHP Notice:  Trying to get property 'num_rows' of non-object in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 8
+[18-Jun-2024 14:46:06 UTC] PHP Notice:  Trying to get property 'num_rows' of non-object in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 8
+[18-Jun-2024 14:46:13 UTC] PHP Notice:  Trying to get property 'num_rows' of non-object in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 8
+[18-Jun-2024 14:46:23 UTC] PHP Notice:  Trying to get property 'num_rows' of non-object in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 8
+[18-Jun-2024 14:53:03 UTC] PHP Notice:  Trying to get property 'num_rows' of non-object in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 8
+[18-Jun-2024 14:53:51 UTC] PHP Notice:  Trying to get property 'num_rows' of non-object in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 8
+[18-Jun-2024 14:55:40 UTC] PHP Notice:  Trying to get property 'num_rows' of non-object in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 8
+[18-Jun-2024 14:56:18 UTC] PHP Notice:  Trying to get property 'num_rows' of non-object in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 8
+[18-Jun-2024 14:56:30 UTC] PHP Notice:  Trying to get property 'num_rows' of non-object in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 8
+[18-Jun-2024 14:56:34 UTC] PHP Notice:  Trying to get property 'num_rows' of non-object in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 8
+[18-Jun-2024 14:56:54 UTC] PHP Notice:  Trying to get property 'num_rows' of non-object in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 8
+[18-Jun-2024 14:57:33 UTC] PHP Notice:  Trying to get property 'num_rows' of non-object in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 8
+[18-Jun-2024 14:57:40 UTC] PHP Notice:  Trying to get property 'num_rows' of non-object in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 8
+[18-Jun-2024 15:12:43 UTC] PHP Notice:  Trying to get property 'num_rows' of non-object in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 8
+[18-Jun-2024 15:13:50 UTC] PHP Notice:  Trying to get property 'num_rows' of non-object in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 8
+[18-Jun-2024 15:13:53 UTC] PHP Notice:  Trying to get property 'num_rows' of non-object in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 8
+[18-Jun-2024 15:20:01 UTC] UserID received: 5
+[18-Jun-2024 15:20:01 UTC] Query Error: Table 'kthcrqqd_uumcareeradvisor.tbl_post_favorites' doesn't exist
+[18-Jun-2024 15:20:01 UTC] Response: {"status":"failed","message":"Query Error: Table 'kthcrqqd_uumcareeradvisor.tbl_post_favorites' doesn't exist"}
+[18-Jun-2024 15:23:19 UTC] UserID received: 5
+[18-Jun-2024 15:23:19 UTC] Query Error: Unknown column 'userid' in 'where clause'
+[18-Jun-2024 15:23:19 UTC] Response: {"status":"failed","message":"Query Error: Unknown column 'userid' in 'where clause'"}
+[18-Jun-2024 15:23:37 UTC] UserID received: 5
+[18-Jun-2024 15:23:37 UTC] Response: {"status":"success","data":[{"post_id":"1","user_id":"3","user_name":"admin","post_title":"Sharpen your skills","post_content":"Technical skills are very important in the field of IT and Computer Science. Always aim to further improve your skills. Here are some tips you may find helpful to train your personal skills.","post_likes":"2"},{"post_id":"2","user_id":"3","user_name":"admin","post_title":"Skill requirements","post_content":"Another important tips for students that are undergoing interships in company is to look for the skills requirements beforehand. This will benefit you a lot if you studied beforehand about what sort of working environment you will be working at.","post_likes":"3"},{"post_id":"3","user_id":"3","user_name":"admin","post_title":"Experience sharing ","post_content":"Here you can find some past experiences from seniors and alumni of UUM that has been working in the industry for years.","post_likes":"1"}]}
+[18-Jun-2024 15:23:41 UTC] UserID received: 5
+[18-Jun-2024 15:23:41 UTC] Response: {"status":"success","data":[{"post_id":"1","user_id":"3","user_name":"admin","post_title":"Sharpen your skills","post_content":"Technical skills are very important in the field of IT and Computer Science. Always aim to further improve your skills. Here are some tips you may find helpful to train your personal skills.","post_likes":"2"},{"post_id":"2","user_id":"3","user_name":"admin","post_title":"Skill requirements","post_content":"Another important tips for students that are undergoing interships in company is to look for the skills requirements beforehand. This will benefit you a lot if you studied beforehand about what sort of working environment you will be working at.","post_likes":"3"},{"post_id":"3","user_id":"3","user_name":"admin","post_title":"Experience sharing ","post_content":"Here you can find some past experiences from seniors and alumni of UUM that has been working in the industry for years.","post_likes":"1"}]}
+[18-Jun-2024 15:24:13 UTC] UserID received: 5
+[18-Jun-2024 15:24:13 UTC] Response: {"status":"success","data":[{"post_id":"1","user_id":"3","user_name":"admin","post_title":"Sharpen your skills","post_content":"Technical skills are very important in the field of IT and Computer Science. Always aim to further improve your skills. Here are some tips you may find helpful to train your personal skills.","post_likes":"2"},{"post_id":"2","user_id":"3","user_name":"admin","post_title":"Skill requirements","post_content":"Another important tips for students that are undergoing interships in company is to look for the skills requirements beforehand. This will benefit you a lot if you studied beforehand about what sort of working environment you will be working at.","post_likes":"3"},{"post_id":"3","user_id":"3","user_name":"admin","post_title":"Experience sharing ","post_content":"Here you can find some past experiences from seniors and alumni of UUM that has been working in the industry for years.","post_likes":"1"}]}
+[18-Jun-2024 15:25:07 UTC] UserID received: 5
+[18-Jun-2024 15:25:07 UTC] PHP Notice:  Undefined index: userHasLiked in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 20
+[18-Jun-2024 15:25:07 UTC] PHP Notice:  Undefined index: isFavorite in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 21
+[18-Jun-2024 15:25:07 UTC] PHP Notice:  Undefined index: userHasLiked in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 20
+[18-Jun-2024 15:25:07 UTC] PHP Notice:  Undefined index: isFavorite in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 21
+[18-Jun-2024 15:25:07 UTC] PHP Notice:  Undefined index: userHasLiked in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 20
+[18-Jun-2024 15:25:07 UTC] PHP Notice:  Undefined index: isFavorite in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 21
+[18-Jun-2024 15:25:07 UTC] Response: {"status":"success","data":[{"post_id":"1","user_id":"3","user_name":"admin","post_title":"Sharpen your skills","post_content":"Technical skills are very important in the field of IT and Computer Science. Always aim to further improve your skills. Here are some tips you may find helpful to train your personal skills.","post_likes":"2","userHasLiked":0,"isFavorite":0},{"post_id":"2","user_id":"3","user_name":"admin","post_title":"Skill requirements","post_content":"Another important tips for students that are undergoing interships in company is to look for the skills requirements beforehand. This will benefit you a lot if you studied beforehand about what sort of working environment you will be working at.","post_likes":"3","userHasLiked":0,"isFavorite":0},{"post_id":"3","user_id":"3","user_name":"admin","post_title":"Experience sharing ","post_content":"Here you can find some past experiences from seniors and alumni of UUM that has been working in the industry for years.","post_likes":"1","userHasLiked":0,"isFavorite":0}]}
+[18-Jun-2024 15:27:13 UTC] UserID received: 5
+[18-Jun-2024 15:27:13 UTC] PHP Notice:  Undefined index: userHasLiked in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 20
+[18-Jun-2024 15:27:13 UTC] PHP Notice:  Undefined index: isFavorite in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 21
+[18-Jun-2024 15:27:13 UTC] PHP Notice:  Undefined index: userHasLiked in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 20
+[18-Jun-2024 15:27:13 UTC] PHP Notice:  Undefined index: isFavorite in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 21
+[18-Jun-2024 15:27:13 UTC] PHP Notice:  Undefined index: userHasLiked in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 20
+[18-Jun-2024 15:27:13 UTC] PHP Notice:  Undefined index: isFavorite in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 21
+[18-Jun-2024 15:27:13 UTC] Response: {"status":"success","data":[{"post_id":"1","user_id":"3","user_name":"admin","post_title":"Sharpen your skills","post_content":"Technical skills are very important in the field of IT and Computer Science. Always aim to further improve your skills. Here are some tips you may find helpful to train your personal skills.","post_likes":"2","userHasLiked":0,"isFavorite":0},{"post_id":"2","user_id":"3","user_name":"admin","post_title":"Skill requirements","post_content":"Another important tips for students that are undergoing interships in company is to look for the skills requirements beforehand. This will benefit you a lot if you studied beforehand about what sort of working environment you will be working at.","post_likes":"3","userHasLiked":0,"isFavorite":0},{"post_id":"3","user_id":"3","user_name":"admin","post_title":"Experience sharing ","post_content":"Here you can find some past experiences from seniors and alumni of UUM that has been working in the industry for years.","post_likes":"1","userHasLiked":0,"isFavorite":0}]}
+[18-Jun-2024 15:28:14 UTC] UserID received: 5
+[18-Jun-2024 15:28:14 UTC] PHP Notice:  Undefined index: userHasLiked in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 20
+[18-Jun-2024 15:28:14 UTC] PHP Notice:  Undefined index: isFavorite in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 21
+[18-Jun-2024 15:28:14 UTC] PHP Notice:  Undefined index: userHasLiked in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 20
+[18-Jun-2024 15:28:14 UTC] PHP Notice:  Undefined index: isFavorite in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 21
+[18-Jun-2024 15:28:14 UTC] PHP Notice:  Undefined index: userHasLiked in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 20
+[18-Jun-2024 15:28:14 UTC] PHP Notice:  Undefined index: isFavorite in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 21
+[18-Jun-2024 15:28:14 UTC] Response: {"status":"success","data":[{"post_id":"1","user_id":"3","user_name":"admin","post_title":"Sharpen your skills","post_content":"Technical skills are very important in the field of IT and Computer Science. Always aim to further improve your skills. Here are some tips you may find helpful to train your personal skills.","post_likes":"2","userHasLiked":0,"isFavorite":0},{"post_id":"2","user_id":"3","user_name":"admin","post_title":"Skill requirements","post_content":"Another important tips for students that are undergoing interships in company is to look for the skills requirements beforehand. This will benefit you a lot if you studied beforehand about what sort of working environment you will be working at.","post_likes":"3","userHasLiked":0,"isFavorite":0},{"post_id":"3","user_id":"3","user_name":"admin","post_title":"Experience sharing ","post_content":"Here you can find some past experiences from seniors and alumni of UUM that has been working in the industry for years.","post_likes":"1","userHasLiked":0,"isFavorite":0}]}
+[18-Jun-2024 15:28:26 UTC] UserID received: 5
+[18-Jun-2024 15:28:26 UTC] PHP Notice:  Undefined index: userHasLiked in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 20
+[18-Jun-2024 15:28:26 UTC] PHP Notice:  Undefined index: isFavorite in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 21
+[18-Jun-2024 15:28:26 UTC] PHP Notice:  Undefined index: userHasLiked in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 20
+[18-Jun-2024 15:28:26 UTC] PHP Notice:  Undefined index: isFavorite in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 21
+[18-Jun-2024 15:28:26 UTC] PHP Notice:  Undefined index: userHasLiked in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 20
+[18-Jun-2024 15:28:26 UTC] PHP Notice:  Undefined index: isFavorite in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 21
+[18-Jun-2024 15:28:26 UTC] Response: {"status":"success","data":[{"post_id":"1","user_id":"3","user_name":"admin","post_title":"Sharpen your skills","post_content":"Technical skills are very important in the field of IT and Computer Science. Always aim to further improve your skills. Here are some tips you may find helpful to train your personal skills.","post_likes":"2","userHasLiked":0,"isFavorite":0},{"post_id":"2","user_id":"3","user_name":"admin","post_title":"Skill requirements","post_content":"Another important tips for students that are undergoing interships in company is to look for the skills requirements beforehand. This will benefit you a lot if you studied beforehand about what sort of working environment you will be working at.","post_likes":"3","userHasLiked":0,"isFavorite":0},{"post_id":"3","user_id":"3","user_name":"admin","post_title":"Experience sharing ","post_content":"Here you can find some past experiences from seniors and alumni of UUM that has been working in the industry for years.","post_likes":"1","userHasLiked":0,"isFavorite":0}]}
+[18-Jun-2024 15:29:08 UTC] UserID received: 5
+[18-Jun-2024 15:29:08 UTC] Response: {"status":"failed","message":"No saved posts found"}
+[18-Jun-2024 15:29:48 UTC] UserID received: 5
+[18-Jun-2024 15:29:48 UTC] PHP Notice:  Undefined index: userHasLiked in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 20
+[18-Jun-2024 15:29:48 UTC] PHP Notice:  Undefined index: isFavorite in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 21
+[18-Jun-2024 15:29:48 UTC] Response: {"status":"success","data":[{"post_id":"1","user_id":"3","user_name":"admin","post_title":"Sharpen your skills","post_content":"Technical skills are very important in the field of IT and Computer Science. Always aim to further improve your skills. Here are some tips you may find helpful to train your personal skills.","post_likes":"2","userHasLiked":0,"isFavorite":0}]}
+[18-Jun-2024 15:30:20 UTC] UserID received: 5
+[18-Jun-2024 15:30:20 UTC] PHP Notice:  Undefined index: userHasLiked in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 20
+[18-Jun-2024 15:30:20 UTC] PHP Notice:  Undefined index: isFavorite in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 21
+[18-Jun-2024 15:30:20 UTC] Response: {"status":"success","data":[{"post_id":"1","user_id":"3","user_name":"admin","post_title":"Sharpen your skills","post_content":"Technical skills are very important in the field of IT and Computer Science. Always aim to further improve your skills. Here are some tips you may find helpful to train your personal skills.","post_likes":"2","userHasLiked":0,"isFavorite":0}]}
+[18-Jun-2024 15:30:27 UTC] UserID received: 5
+[18-Jun-2024 15:30:27 UTC] PHP Notice:  Undefined index: userHasLiked in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 20
+[18-Jun-2024 15:30:27 UTC] PHP Notice:  Undefined index: isFavorite in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 21
+[18-Jun-2024 15:30:27 UTC] Response: {"status":"success","data":[{"post_id":"1","user_id":"3","user_name":"admin","post_title":"Sharpen your skills","post_content":"Technical skills are very important in the field of IT and Computer Science. Always aim to further improve your skills. Here are some tips you may find helpful to train your personal skills.","post_likes":"2","userHasLiked":0,"isFavorite":0}]}
+[18-Jun-2024 15:31:11 UTC] UserID received: 5
+[18-Jun-2024 15:31:11 UTC] PHP Notice:  Undefined index: userHasLiked in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 20
+[18-Jun-2024 15:31:11 UTC] PHP Notice:  Undefined index: isFavorite in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 21
+[18-Jun-2024 15:31:11 UTC] Response: {"status":"success","data":[{"post_id":"1","user_id":"3","user_name":"admin","post_title":"Sharpen your skills","post_content":"Technical skills are very important in the field of IT and Computer Science. Always aim to further improve your skills. Here are some tips you may find helpful to train your personal skills.","post_likes":"2","userHasLiked":0,"isFavorite":0}]}
+[24-Jun-2024 13:50:44 UTC] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on bool in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/upvote_comment.php:18
+Stack trace:
+#0 {main}
+  thrown in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/upvote_comment.php on line 18
+[24-Jun-2024 13:50:49 UTC] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on bool in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/upvote_comment.php:18
+Stack trace:
+#0 {main}
+  thrown in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/upvote_comment.php on line 18
+[24-Jun-2024 13:51:36 UTC] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on bool in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/upvote_comment.php:18
+Stack trace:
+#0 {main}
+  thrown in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/upvote_comment.php on line 18
+[24-Jun-2024 13:51:44 UTC] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on bool in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/upvote_comment.php:18
+Stack trace:
+#0 {main}
+  thrown in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/upvote_comment.php on line 18
+[24-Jun-2024 13:52:41 UTC] UserID received: 5
+[24-Jun-2024 13:52:41 UTC] PHP Notice:  Undefined index: userHasLiked in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 20
+[24-Jun-2024 13:52:41 UTC] PHP Notice:  Undefined index: isFavorite in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 21
+[24-Jun-2024 13:52:41 UTC] PHP Notice:  Undefined index: userHasLiked in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 20
+[24-Jun-2024 13:52:41 UTC] PHP Notice:  Undefined index: isFavorite in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 21
+[24-Jun-2024 13:52:41 UTC] Response: {"status":"success","data":[{"post_id":"1","user_id":"3","user_name":"admin","post_title":"Sharpen your skills","post_content":"Technical skills are very important in the field of IT and Computer Science. Always aim to further improve your skills. Here are some tips you may find helpful to train your personal skills.","post_likes":"2","userHasLiked":0,"isFavorite":0},{"post_id":"2","user_id":"3","user_name":"admin","post_title":"Skill requirements","post_content":"Another important tips for students that are undergoing interships in company is to look for the skills requirements beforehand. This will benefit you a lot if you studied beforehand about what sort of working environment you will be working at.","post_likes":"3","userHasLiked":0,"isFavorite":0}]}
+[24-Jun-2024 13:52:43 UTC] UserID received: 5
+[24-Jun-2024 13:52:43 UTC] PHP Notice:  Undefined index: userHasLiked in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 20
+[24-Jun-2024 13:52:43 UTC] PHP Notice:  Undefined index: isFavorite in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 21
+[24-Jun-2024 13:52:43 UTC] PHP Notice:  Undefined index: userHasLiked in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 20
+[24-Jun-2024 13:52:43 UTC] PHP Notice:  Undefined index: isFavorite in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 21
+[24-Jun-2024 13:52:43 UTC] Response: {"status":"success","data":[{"post_id":"1","user_id":"3","user_name":"admin","post_title":"Sharpen your skills","post_content":"Technical skills are very important in the field of IT and Computer Science. Always aim to further improve your skills. Here are some tips you may find helpful to train your personal skills.","post_likes":"2","userHasLiked":0,"isFavorite":0},{"post_id":"2","user_id":"3","user_name":"admin","post_title":"Skill requirements","post_content":"Another important tips for students that are undergoing interships in company is to look for the skills requirements beforehand. This will benefit you a lot if you studied beforehand about what sort of working environment you will be working at.","post_likes":"3","userHasLiked":0,"isFavorite":0}]}
+[24-Jun-2024 13:53:12 UTC] UserID received: 5
+[24-Jun-2024 13:53:12 UTC] PHP Notice:  Undefined index: userHasLiked in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 20
+[24-Jun-2024 13:53:12 UTC] PHP Notice:  Undefined index: isFavorite in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 21
+[24-Jun-2024 13:53:12 UTC] PHP Notice:  Undefined index: userHasLiked in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 20
+[24-Jun-2024 13:53:12 UTC] PHP Notice:  Undefined index: isFavorite in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 21
+[24-Jun-2024 13:53:12 UTC] Response: {"status":"success","data":[{"post_id":"1","user_id":"3","user_name":"admin","post_title":"Sharpen your skills","post_content":"Technical skills are very important in the field of IT and Computer Science. Always aim to further improve your skills. Here are some tips you may find helpful to train your personal skills.","post_likes":"2","userHasLiked":0,"isFavorite":0},{"post_id":"2","user_id":"3","user_name":"admin","post_title":"Skill requirements","post_content":"Another important tips for students that are undergoing interships in company is to look for the skills requirements beforehand. This will benefit you a lot if you studied beforehand about what sort of working environment you will be working at.","post_likes":"3","userHasLiked":0,"isFavorite":0}]}
+[24-Jun-2024 13:53:41 UTC] UserID received: 5
+[24-Jun-2024 13:53:41 UTC] PHP Notice:  Undefined index: userHasLiked in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 20
+[24-Jun-2024 13:53:41 UTC] PHP Notice:  Undefined index: isFavorite in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 21
+[24-Jun-2024 13:53:41 UTC] PHP Notice:  Undefined index: userHasLiked in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 20
+[24-Jun-2024 13:53:41 UTC] PHP Notice:  Undefined index: isFavorite in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 21
+[24-Jun-2024 13:53:41 UTC] Response: {"status":"success","data":[{"post_id":"1","user_id":"3","user_name":"admin","post_title":"Sharpen your skills","post_content":"Technical skills are very important in the field of IT and Computer Science. Always aim to further improve your skills. Here are some tips you may find helpful to train your personal skills.","post_likes":"2","userHasLiked":0,"isFavorite":0},{"post_id":"2","user_id":"3","user_name":"admin","post_title":"Skill requirements","post_content":"Another important tips for students that are undergoing interships in company is to look for the skills requirements beforehand. This will benefit you a lot if you studied beforehand about what sort of working environment you will be working at.","post_likes":"3","userHasLiked":0,"isFavorite":0}]}
+[24-Jun-2024 13:55:08 UTC] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on bool in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/downvote_comment.php:18
+Stack trace:
+#0 {main}
+  thrown in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/downvote_comment.php on line 18
+[24-Jun-2024 13:55:33 UTC] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on bool in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/upvote_comment.php:18
+Stack trace:
+#0 {main}
+  thrown in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/upvote_comment.php on line 18
+[24-Jun-2024 13:55:59 UTC] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on bool in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/upvote_comment.php:18
+Stack trace:
+#0 {main}
+  thrown in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/upvote_comment.php on line 18
+[24-Jun-2024 13:56:03 UTC] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on bool in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/downvote_comment.php:18
+Stack trace:
+#0 {main}
+  thrown in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/downvote_comment.php on line 18
+[24-Jun-2024 13:56:26 UTC] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on bool in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/upvote_comment.php:18
+Stack trace:
+#0 {main}
+  thrown in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/upvote_comment.php on line 18
+[24-Jun-2024 14:05:35 UTC] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on bool in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/upvote_comment.php:18
+Stack trace:
+#0 {main}
+  thrown in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/upvote_comment.php on line 18
+[30-Jun-2024 07:05:05 UTC] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on bool in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/upvote_comment.php:18
+Stack trace:
+#0 {main}
+  thrown in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/upvote_comment.php on line 18
+[30-Jun-2024 07:11:11 UTC] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on bool in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/upvote_comment.php:18
+Stack trace:
+#0 {main}
+  thrown in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/upvote_comment.php on line 18
+[30-Jun-2024 07:15:05 UTC] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on bool in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/upvote_comment.php:18
+Stack trace:
+#0 {main}
+  thrown in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/upvote_comment.php on line 18
+[30-Jun-2024 07:16:03 UTC] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on bool in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/upvote_comment.php:18
+Stack trace:
+#0 {main}
+  thrown in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/upvote_comment.php on line 18
+[30-Jun-2024 07:18:55 UTC] PHP Notice:  Trying to get property 'num_rows' of non-object in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/upvote_comment.php on line 11
+[30-Jun-2024 07:19:01 UTC] PHP Notice:  Trying to get property 'num_rows' of non-object in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/upvote_comment.php on line 11
+[30-Jun-2024 07:23:38 UTC] PHP Notice:  Trying to get property 'num_rows' of non-object in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/fetch_single_comment.php on line 9
+[30-Jun-2024 07:28:57 UTC] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on bool in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/downvote_comment.php:18
+Stack trace:
+#0 {main}
+  thrown in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/downvote_comment.php on line 18
+[30-Jun-2024 07:29:20 UTC] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on bool in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/downvote_comment.php:18
+Stack trace:
+#0 {main}
+  thrown in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/downvote_comment.php on line 18
+[30-Jun-2024 07:29:41 UTC] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on bool in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/downvote_comment.php:18
+Stack trace:
+#0 {main}
+  thrown in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/downvote_comment.php on line 18
+[30-Jun-2024 08:47:16 UTC] PHP Warning:  file_put_contents(../uum_career_advisor_app/assets/images/66811b94778ab.png): failed to open stream: No such file or directory in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/update_profile_picture.php on line 17
+[30-Jun-2024 08:48:52 UTC] PHP Warning:  file_put_contents(../uum_career_advisor_app/assets/images/66811bf42f396.png): failed to open stream: No such file or directory in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/update_profile_picture.php on line 17
+[30-Jun-2024 08:50:29 UTC] PHP Warning:  file_put_contents(assets/profile/66811c5561a29.jpg): failed to open stream: No such file or directory in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/update_profile_picture.php on line 16
+[30-Jun-2024 08:53:33 UTC] PHP Warning:  file_put_contents(assets/profile/66811d0d546b0.jpg): failed to open stream: No such file or directory in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/update_profile_picture.php on line 16
+[30-Jun-2024 12:33:01 UTC] UserID received: 5
+[30-Jun-2024 12:33:01 UTC] PHP Notice:  Undefined index: userHasLiked in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 20
+[30-Jun-2024 12:33:01 UTC] PHP Notice:  Undefined index: isFavorite in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 21
+[30-Jun-2024 12:33:01 UTC] PHP Notice:  Undefined index: userHasLiked in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 20
+[30-Jun-2024 12:33:01 UTC] PHP Notice:  Undefined index: isFavorite in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 21
+[30-Jun-2024 12:33:01 UTC] Response: {"status":"success","data":[{"post_id":"1","user_id":"3","user_name":"admin","post_title":"Sharpen your skills","post_content":"Technical skills are very important in the field of IT and Computer Science. Always aim to further improve your skills. Here are some tips you may find helpful to train your personal skills.","post_likes":"2","userHasLiked":0,"isFavorite":0},{"post_id":"2","user_id":"3","user_name":"admin","post_title":"Skill requirements","post_content":"Another important tips for students that are undergoing interships in company is to look for the skills requirements beforehand. This will benefit you a lot if you studied beforehand about what sort of working environment you will be working at.","post_likes":"4","userHasLiked":0,"isFavorite":0}]}
+[30-Jun-2024 12:33:03 UTC] UserID received: 5
+[30-Jun-2024 12:33:03 UTC] PHP Notice:  Undefined index: userHasLiked in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 20
+[30-Jun-2024 12:33:03 UTC] PHP Notice:  Undefined index: isFavorite in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 21
+[30-Jun-2024 12:33:03 UTC] PHP Notice:  Undefined index: userHasLiked in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 20
+[30-Jun-2024 12:33:03 UTC] PHP Notice:  Undefined index: isFavorite in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 21
+[30-Jun-2024 12:33:03 UTC] Response: {"status":"success","data":[{"post_id":"1","user_id":"3","user_name":"admin","post_title":"Sharpen your skills","post_content":"Technical skills are very important in the field of IT and Computer Science. Always aim to further improve your skills. Here are some tips you may find helpful to train your personal skills.","post_likes":"2","userHasLiked":0,"isFavorite":0},{"post_id":"2","user_id":"3","user_name":"admin","post_title":"Skill requirements","post_content":"Another important tips for students that are undergoing interships in company is to look for the skills requirements beforehand. This will benefit you a lot if you studied beforehand about what sort of working environment you will be working at.","post_likes":"4","userHasLiked":0,"isFavorite":0}]}
+[30-Jun-2024 12:34:10 UTC] UserID received: 5
+[30-Jun-2024 12:34:10 UTC] PHP Notice:  Undefined index: userHasLiked in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 20
+[30-Jun-2024 12:34:10 UTC] PHP Notice:  Undefined index: isFavorite in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 21
+[30-Jun-2024 12:34:10 UTC] PHP Notice:  Undefined index: userHasLiked in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 20
+[30-Jun-2024 12:34:10 UTC] PHP Notice:  Undefined index: isFavorite in /home4/kthcrqqd/public_html/uum_career_advisor_app/php/load_favorites.php on line 21
+[30-Jun-2024 12:34:10 UTC] Response: {"status":"success","data":[{"post_id":"1","user_id":"3","user_name":"admin","post_title":"Sharpen your skills","post_content":"Technical skills are very important in the field of IT and Computer Science. Always aim to further improve your skills. Here are some tips you may find helpful to train your personal skills.","post_likes":"2","userHasLiked":0,"isFavorite":0},{"post_id":"2","user_id":"3","user_name":"admin","post_title":"Skill requirements","post_content":"Another important tips for students that are undergoing interships in company is to look for the skills requirements beforehand. This will benefit you a lot if you studied beforehand about what sort of working environment you will be working at.","post_likes":"4","userHasLiked":0,"isFavorite":0}]}

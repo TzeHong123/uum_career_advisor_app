@@ -24,10 +24,11 @@ $row = $resultCount->fetch_assoc();
 $number_of_result = $row['total'];
 $number_of_page = ceil($number_of_result / $results_per_page);
 
-// Fetch posts and likes data
+// Fetch posts, likes, and favorite status data
 $sqlLoadPosts = "SELECT p.*, 
                         (SELECT COUNT(*) FROM tbl_post_likes WHERE post_id = p.post_id) AS likes, 
-                        (SELECT user_has_liked FROM tbl_post_likes WHERE post_id = p.post_id AND user_id = '$user_id') AS userHasLiked 
+                        (SELECT user_has_liked FROM tbl_post_likes WHERE post_id = p.post_id AND user_id = '$user_id') AS userHasLiked,
+                        (SELECT added_to_fav FROM tbl_post_favourites WHERE post_id = p.post_id AND user_id = '$user_id') AS isFavorite
                  " . $sqlBase . $sqlWhere . $sqlLimit;
 
 $result = $conn->query($sqlLoadPosts);
@@ -35,8 +36,9 @@ $result = $conn->query($sqlLoadPosts);
 if ($result->num_rows > 0) {
     $posts = array();
     while ($row = $result->fetch_assoc()) {
-        // Cast userHasLiked to boolean
+        // Cast userHasLiked and isFavorite to boolean
         $row['userHasLiked'] = $row['userHasLiked'] == 1 ? 1 : 0;
+        $row['isFavorite'] = $row['isFavorite'] == 1 ? 1 : 0;
         $posts[] = $row;
     }
     sendJsonResponse(array('status' => 'success', 'data' => array("posts" => $posts), 'numofpage' => $number_of_page, 'numberofresult' => $number_of_result));
