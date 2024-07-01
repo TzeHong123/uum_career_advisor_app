@@ -33,13 +33,13 @@ class _PostDetailPageState extends State<PostDetailPage> {
       appBar: AppBar(
         title: Text('Post Details'),
         backgroundColor: Colors.blueGrey,
-        actions: <Widget>[
-          if (widget.user.role == "Senior")
-            IconButton(
-              icon: Icon(Icons.add),
-              onPressed: () => _showAddAdviceDialog(context),
-            )
-        ],
+        // actions: <Widget>[
+        //   if (widget.user.role == "Senior")
+        //     IconButton(
+        //       icon: Icon(Icons.add),
+        //       onPressed: () => _showAddAdviceDialog(context),
+        //     )
+        // ],
       ),
       body: SingleChildScrollView(
         child: Padding(

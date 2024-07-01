@@ -48,6 +48,12 @@ class _MyPostDetailPageState extends State<MyPostDetailPage> {
         widget.post.postTitle = _titleController.text;
         widget.post.postContent = _contentController.text;
       });
+      Fluttertoast.showToast(
+          msg: "Post updated successfully!",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          fontSize: 16.0);
       Navigator.pop(context); // Optionally pop the context after updating
     } else {
       // Handle error
@@ -59,20 +65,35 @@ class _MyPostDetailPageState extends State<MyPostDetailPage> {
     var url = Uri.parse(
         "${MyConfig().SERVER}/uum_career_advisor_app/php/delete_post.php");
     var response = await http.post(url, body: {
-      'post_id':
-          widget.post.postId.toString(), // assuming your post model has an id
+      'post_id': widget.post.postId.toString(),
     });
 
-    if (response.body == 'success') {
+    if (response.statusCode == 200) {
+      var jsonResponse = json.decode(response.body);
+      if (jsonResponse['status'] == 'success') {
+        Fluttertoast.showToast(
+            msg: jsonResponse['message'],
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            fontSize: 16.0);
+        Navigator.pop(context); // Pop the context after deletion
+      } else {
+        Fluttertoast.showToast(
+            msg: jsonResponse['message'],
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            fontSize: 16.0);
+        print('Failed to delete post');
+      }
+    } else {
       Fluttertoast.showToast(
-          msg: "Post deleted successfully!",
+          msg: "Post deletion unsuccessful!",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
           fontSize: 16.0);
-      Navigator.pop(context); // Pop the context after deletion
-    } else {
-      // Handle error
       print('Failed to delete post');
     }
   }
