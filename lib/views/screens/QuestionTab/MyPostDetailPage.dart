@@ -42,21 +42,24 @@ class _MyPostDetailPageState extends State<MyPostDetailPage> {
     var url = Uri.parse(
         "${MyConfig().SERVER}/uum_career_advisor_app/php/update_question.php");
     var response = await http.post(url, body: {
-      'question_id': widget.question.questionId
-          .toString(), // assuming your Question model has an id
+      'question_id': widget.question.questionId.toString(),
       'question_title': _titleController.text,
       'question_content': _contentController.text,
     });
 
     if (response.body == 'success') {
       setState(() {
-        // Update the local data that feeds the UI, if necessary
         widget.question.questionTitle = _titleController.text;
         widget.question.questionContent = _contentController.text;
       });
-      Navigator.pop(context); // Optionally pop the context after updating
+      Fluttertoast.showToast(
+          msg: "Question details updated!",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          fontSize: 16.0);
+      Navigator.pop(context, true); // Optionally pop the context after updating
     } else {
-      // Handle error
       print('Failed to update question');
     }
   }
@@ -65,25 +68,19 @@ class _MyPostDetailPageState extends State<MyPostDetailPage> {
     var url = Uri.parse(
         "${MyConfig().SERVER}/uum_career_advisor_app/php/delete_question.php");
     var response = await http.post(url, body: {
-      'question_id': widget.question.questionId
-          .toString(), // assuming your Question model has an id
+      'question_id': widget.question.questionId.toString(),
     });
 
-    if (response.body == 'success') {
+    var responseData = json.decode(response.body);
+    if (responseData['status'] == 'success') {
       Fluttertoast.showToast(
           msg: "Question Deleted!",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
           fontSize: 16.0);
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (content) => QuestionTabScreen(
-                    user: widget.user,
-                  )));
+      Navigator.pop(context, true);
     } else {
-      // Handle error
       print('Failed to delete post');
     }
   }
@@ -100,15 +97,14 @@ class _MyPostDetailPageState extends State<MyPostDetailPage> {
             TextButton(
               child: Text("Cancel"),
               onPressed: () {
-                Navigator.of(context)
-                    .pop(); // Dismiss the dialog but do nothing
+                Navigator.of(context).pop();
               },
             ),
             TextButton(
               child: Text("Delete", style: TextStyle(color: Colors.red)),
               onPressed: () {
-                Navigator.of(context).pop(); // Dismiss the dialog
-                _deletePost(); // Proceed with the deletion
+                Navigator.of(context).pop();
+                _deletePost();
               },
             ),
           ],

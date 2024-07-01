@@ -86,7 +86,6 @@ class _PostCreationPageState extends State<PostCreationPage> {
                 child: Text('Submit Post'),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    // Create a Post object with user info and save it
                     Post newPost = Post(
                       userId: widget.user.id,
                       userName: widget.user.name,
@@ -111,19 +110,12 @@ class _PostCreationPageState extends State<PostCreationPage> {
                         if (response.statusCode == 200) {
                           var jsondata = jsonDecode(response.body);
                           if (jsondata['status'] == 'success') {
-                            // User user = User.fromJson(jsondata['data']);
-                            // print(user.name);
-                            // print(user.email);
                             ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                     content:
                                         Text("Post Created Successfully!")));
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (content) => AdviceTabScreen(
-                                          user: widget.user,
-                                        )));
+                            Navigator.pop(context,
+                                true); // Return true to indicate success
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
@@ -135,9 +127,6 @@ class _PostCreationPageState extends State<PostCreationPage> {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                           content: Text("Post Creation failed.")));
                     }
-
-                    // Navigate back to previous screen
-                    Navigator.pop(context);
                   }
                 },
               ),

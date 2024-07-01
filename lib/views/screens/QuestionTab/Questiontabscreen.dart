@@ -150,16 +150,19 @@ class _QuestionTabScreenState extends State<QuestionTabScreen>
       ),
       floatingActionButton: _showAddButton()
           ? FloatingActionButton(
-              onPressed: () {
+              onPressed: () async {
                 if (_tabController.index == 0) {
                   if (_checkUserRole() == 'student') {
-                    Navigator.push(
+                    final result = await Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
                             QuestionCreationPage(user: widget.user),
                       ),
                     );
+                    if (result == true) {
+                      loadQuestions(); // Reload questions if a new question was added
+                    }
                   } else {
                     // Show a message or dialog informing that only students can ask questions
                     showDialog(

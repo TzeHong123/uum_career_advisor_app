@@ -70,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 5,
             ),
             SizedBox(
-                height: screenHeight * 0.4,
+                height: screenHeight * 0.43,
                 width: screenWidth * 0.95,
                 child: Image.asset(
                   "assets/images/Loginimage1.png",
@@ -181,15 +181,15 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(
               height: 8,
             ),
-            GestureDetector(
-              onTap: _forgotDialog,
-              child: const Text(
-                "Forgot Password?",
-                style: TextStyle(
-                  fontSize: 20,
-                ),
-              ),
-            ),
+            // GestureDetector(
+            //   onTap: _forgotDialog,
+            //   child: const Text(
+            //     "Forgot Password?",
+            //     style: TextStyle(
+            //       fontSize: 20,
+            //     ),
+            //   ),
+            // ),
             const SizedBox(
               height: 16,
             ),

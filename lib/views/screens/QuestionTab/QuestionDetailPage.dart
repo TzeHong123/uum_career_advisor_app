@@ -71,7 +71,7 @@ class _QuestionDetailPageState extends State<QuestionDetailPage> {
     String questionId = widget.question.questionId ?? ''; // Question ID
 
     String userProfilePic =
-        "assets/images/profile.png"; // Example profile picture path
+        widget.user.profilePicture ?? ''; // Example profile picture path
 
     if (commentController.text.isNotEmpty) {
       addComment(userId, questionId, userProfilePic, commentController.text)
@@ -312,7 +312,8 @@ class CommentWidget extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 8.0),
       child: ListTile(
         leading: CircleAvatar(
-          backgroundImage: AssetImage(comment.userProfilePic!),
+          backgroundImage: NetworkImage(
+              "${MyConfig().SERVER}/uum_career_advisor_app/php/assets/profile/${comment.userProfilePic}"),
           // Using ! to assert that userProfilePic is not null
         ),
         title: Text(comment.username ?? "Anonymous",

@@ -1,12 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
-
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
 import 'package:uum_career_advisor_app/models/question.dart';
 import 'package:uum_career_advisor_app/models/user.dart';
 import 'package:http/http.dart' as http;
 import 'package:uum_career_advisor_app/myconfig.dart';
-import 'package:uum_career_advisor_app/views/screens/QuestionTab/Questiontabscreen.dart';
 
 class QuestionCreationPage extends StatefulWidget {
   final User user;
@@ -108,32 +107,32 @@ class _QuestionCreationPageState extends State<QuestionCreationPage> {
                         if (response.statusCode == 200) {
                           var jsondata = jsonDecode(response.body);
                           if (jsondata['status'] == 'success') {
-                            // User user = User.fromJson(jsondata['data']);
-                            // print(user.name);
-                            // print(user.email);
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text("Question Created!")));
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (content) => QuestionTabScreen(
-                                          user: widget.user,
-                                        )));
+                            Fluttertoast.showToast(
+                                msg: "Question successfully added!",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 1,
+                                fontSize: 16.0);
+                            // Pop to the previous screen and trigger a refresh
+                            Navigator.pop(context, true);
                           } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text("Failed to add question!")));
+                            Fluttertoast.showToast(
+                                msg: "Failed to add question!",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 1,
+                                fontSize: 16.0);
                           }
                         }
                       });
                     } catch (e) {
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                          content: Text("Question Creation failed.")));
+                      Fluttertoast.showToast(
+                          msg: "Failed to add question!",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.BOTTOM,
+                          timeInSecForIosWeb: 1,
+                          fontSize: 16.0);
                     }
-
-                    // Navigate back to previous screen
-                    Navigator.pop(context);
                   }
                 },
               ),

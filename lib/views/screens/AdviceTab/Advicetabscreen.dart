@@ -156,17 +156,20 @@ class _AdviceTabScreenState extends State<AdviceTabScreen>
       ),
       floatingActionButton: _showAddButton()
           ? FloatingActionButton(
-              onPressed: () {
+              onPressed: () async {
                 if (_tabController.index == 0) {
                   if (_checkUserRole() == 'senior' &&
                       widget.user.name == 'admin') {
-                    Navigator.push(
+                    final result = await Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
                             PostCreationPage(user: widget.user),
                       ),
                     );
+                    if (result == true) {
+                      loadPosts(); // Reload questions if a new question was added
+                    }
                   } else {
                     showDialog(
                       context: context,
